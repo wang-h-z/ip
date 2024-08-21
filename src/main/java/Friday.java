@@ -11,8 +11,6 @@ public class Friday {
             ____________________________________________________________
             """;
 
-    
-
     public static void main(String[] args) {
         Friday bot = new Friday();
         System.out.println(bot.header + bot.ending);
