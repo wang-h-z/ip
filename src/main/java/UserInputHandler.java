@@ -12,6 +12,7 @@ public class UserInputHandler {
         return this.scanner.nextLine();
     }
     public String handleInput(String input) {
-        return input;
+        String s = "added: " + input;
+        return s;
     }
 }
