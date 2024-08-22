@@ -13,7 +13,7 @@ public class Friday {
 
     public Friday() {
         this.handler = new UserInputHandler();
-        this.list = new ArrayList<Task>();
+        this.list = new ArrayList<>();
     }
 
     public String printList() {
@@ -57,10 +57,36 @@ public class Friday {
                 System.out.println(output);
                 continue;
             }
-            this.list.add(new Task(input));
-            String response = this.handler.handleInput(input);
-            BotMessage output = new BotMessage(response);
-            System.out.println(output);
+            if (input.startsWith("todo")) {
+                Todo todo = new Todo(input.substring(5).trim());
+                this.list.add(todo);
+                String response = this.handler.handleInput(todo, this.list);
+                BotMessage output = new BotMessage(response);
+                System.out.println(output);
+                continue;
+            }
+            if (input.startsWith("deadline")) {
+                int end = input.indexOf("/by");
+                Deadline deadline = new Deadline(input.substring(9, end).trim(), input.substring(end + 3).trim());
+                this.list.add(deadline);
+                String response = this.handler.handleInput(deadline, this.list);
+                BotMessage output = new BotMessage(response);
+                System.out.println(output);
+                continue;
+            }
+            if (input.startsWith("event")) {
+                int eventIndex = input.indexOf("event") + "event".length();
+                int fromIndex = input.indexOf("/from");
+                int toIndex = input.indexOf("/to");
+                Event event = new Event(input.substring(eventIndex, fromIndex).trim(),
+                                        input.substring(fromIndex + "/from".length(), toIndex).trim(),
+                                        input.substring(toIndex + "/to".length()).trim());
+                this.list.add(event);
+                String response = this.handler.handleInput(event, this.list);
+                BotMessage output = new BotMessage(response);
+                System.out.println(output);
+                continue;
+            }
         }
     }
     public static void main(String[] args) {

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInputHandler {
@@ -11,8 +12,10 @@ public class UserInputHandler {
     public String getInput() {
         return this.scanner.nextLine();
     }
-    public String handleInput(String input) {
-        String s = "added: " + input;
-        return s;
+    public String handleInput(Task task, ArrayList<Task> list) {
+        return String.format(""" 
+       Got it. I've added this task:
+       %s
+       Now you have %d tasks in the list.""", task, list.size());
     }
 }
