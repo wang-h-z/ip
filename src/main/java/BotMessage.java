@@ -8,6 +8,6 @@ public class BotMessage {
 
     @Override
     public String toString() {
-        return this.spacing + '\n' + this.description + '\n' + this.spacing;
+        return '\t' + this.spacing + '\n' + this.description + '\n' + '\t' + this.spacing + "\n";
     }
 }

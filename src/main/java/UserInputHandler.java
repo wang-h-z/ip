@@ -14,8 +14,8 @@ public class UserInputHandler {
     }
     public String handleInput(Task task, ArrayList<Task> list) {
         return String.format(""" 
-       Got it. I've added this task:
-       %s
-       Now you have %d tasks in the list.""", task, list.size());
+       \t Got it. I've added this task:
+       \t  %s
+       \t Now you have %d tasks in the list.""", task, list.size());
     }
 }
