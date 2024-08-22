@@ -9,12 +9,11 @@ public class Friday {
              Bye. Hope to see you again soon!""");
 
     private final UserInputHandler handler;
-
-    private ArrayList<String> list;
+    private ArrayList<Task> list;
 
     public Friday() {
         this.handler = new UserInputHandler();
-        this.list = new ArrayList<String>();
+        this.list = new ArrayList<Task>();
     }
 
     public String printList() {
@@ -42,7 +41,23 @@ public class Friday {
                 System.out.println(output);
                 continue;
             }
-            this.list.add(input);
+            if (input.startsWith("mark")) {
+                int idx = Integer.parseInt(input.substring(5));
+                this.list.get(idx - 1).markAsDone();
+                String description = "Nice! I've marked this task as done:" + "\n" + this.list.get(idx - 1);
+                BotMessage output = new BotMessage(description);
+                System.out.println(output);
+                continue;
+            }
+            if (input.startsWith("unmark")) {
+                int idx = Integer.parseInt(input.substring(7));
+                this.list.get(idx - 1).markAsUndone();
+                String description = "OK, I've marked this task as not done yet:" + "\n" + this.list.get(idx - 1);
+                BotMessage output = new BotMessage(description);
+                System.out.println(output);
+                continue;
+            }
+            this.list.add(new Task(input));
             String response = this.handler.handleInput(input);
             BotMessage output = new BotMessage(response);
             System.out.println(output);
