@@ -37,10 +37,10 @@ public class UserInputHandler {
         //Logic for Deadline task
         if (input.startsWith("deadline")) {
             int end = input.indexOf("/by");
-            if (end < 9) {
-                throw new InputException("I do not understand this deadline task. Please try again.");
+            if (!input.contains("/by")) {
+                throw new MissingCommandException("/by");
             }
-            String description = input.substring(9, end).trim();
+            String description = input.substring(input.indexOf("deadline") + "deadline".length(), end).trim();
             if (description.isEmpty()) {
                 throw new DescriptionException("deadline");
             }
@@ -54,18 +54,34 @@ public class UserInputHandler {
 
         //Logic for Event task
         if (input.startsWith("event")) {
+            if (!input.contains("/from")) {
+                throw new MissingCommandException("/from");
+            }
+            if (!input.contains("/to")) {
+                throw new MissingCommandException("/to");
+            }
             int eventIndex = input.indexOf("event") + "event".length();
             int fromIndex = input.indexOf("/from");
             int toIndex = input.indexOf("/to");
-            task = new Event(input.substring(eventIndex, fromIndex).trim(),
-                    input.substring(fromIndex + "/from".length(), toIndex).trim(),
-                    input.substring(toIndex + "/to".length()).trim());
+            String description = input.substring(eventIndex, fromIndex).trim();
+            if (description.isEmpty()) {
+                throw new DescriptionException("event");
+            }
+            String from = input.substring(fromIndex + "/from".length(), toIndex).trim();
+            if (from.isEmpty()) {
+                throw new FromException();
+            }
+            String to = input.substring(toIndex + "/to".length()).trim();
+            if (to.isEmpty()) {
+                throw new ToException();
+            }
+            task = new Event(description, from, to);
             list.add(task);
         }
 
         //Logic for Delete command
         if (input.startsWith("delete")) {
-            int idx = Integer.parseInt(input.substring(6).trim()) - 1;
+            int idx = Integer.parseInt(input.substring("delete".length()).trim()) - 1;
             Task r = list.remove(idx);
             return String.format(""" 
             \t Got it. I've removed this task:
