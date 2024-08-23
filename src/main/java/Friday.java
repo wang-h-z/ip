@@ -68,7 +68,7 @@ public class Friday {
                 BotMessage output = new BotMessage(response);
                 System.out.println(output);
 
-            } catch (TodoException e) {
+            } catch (DescriptionException e) {
                 BotMessage message = new BotMessage(e.getMessage());
                 System.out.println(message);
             } catch (FridayException e) {

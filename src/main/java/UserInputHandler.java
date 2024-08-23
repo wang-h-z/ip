@@ -3,7 +3,7 @@ import java.util.*;
 public class UserInputHandler {
 
     private final Scanner scanner;
-    private final Set<String> validCommands = new HashSet<>(Arrays.asList("bye", "list", "unmark", "unmark", "todo", "deadline", "event", "delete"));
+    private final Set<String> validCommands = new HashSet<>(Arrays.asList("bye", "list", "mark", "unmark", "todo", "deadline", "event", "delete"));
     private final String ending = """
              \t  Bye. Hope to see you again soon!""";
 
@@ -25,18 +25,34 @@ public class UserInputHandler {
 
         Task task = null;
 
+        //Logic for Todo task
         if (input.startsWith("todo")) {
             if (input.trim().length() == 4 || input.substring(5).trim().isEmpty()) {
-                throw new TodoException();
+                throw new DescriptionException("todo");
             }
             task = new Todo(input.substring(5).trim());
             list.add(task);
         }
+
+        //Logic for Deadline task
         if (input.startsWith("deadline")) {
             int end = input.indexOf("/by");
-            task = new Deadline(input.substring(9, end).trim(), input.substring(end + 3).trim());
+            if (end < 9) {
+                throw new InputException("I do not understand this deadline task. Please try again.");
+            }
+            String description = input.substring(9, end).trim();
+            if (description.isEmpty()) {
+                throw new DescriptionException("deadline");
+            }
+            String deadline = input.substring(end + 3).trim();
+            if (deadline.isEmpty()) {
+                throw new DeadlineException("deadline");
+            }
+            task = new Deadline(description, deadline);
             list.add(task);
         }
+
+        //Logic for Event task
         if (input.startsWith("event")) {
             int eventIndex = input.indexOf("event") + "event".length();
             int fromIndex = input.indexOf("/from");
@@ -47,6 +63,7 @@ public class UserInputHandler {
             list.add(task);
         }
 
+        //Logic for Delete command
         if (input.startsWith("delete")) {
             int idx = Integer.parseInt(input.substring(6).trim()) - 1;
             Task r = list.remove(idx);
