@@ -18,6 +18,9 @@ public class Friday {
 
     public String printList() {
         String items = "";
+        if (this.list.isEmpty()) {
+            return "\t  There are currently no items in your list.";
+        }
         for (int i = 0; i < this.list.size(); i++) {
             String d = String.format("\t  %s.%s", i + 1, this.list.get(i));
             if (i == this.list.size() - 1) {
@@ -31,64 +34,48 @@ public class Friday {
     public void start() {
         System.out.println(header);
         while (true) {
-            String input = this.handler.getInput();
-            if (input.equals("bye")) {
-                System.out.println(this.ending);
-                break;
-            }
-            if (input.equals("list")) {
-                String description = "\t Here are the tasks in your list:" + "\n" + this.printList();
-                BotMessage output = new BotMessage(description);
-                System.out.println(output);
-                continue;
-            }
-            if (input.startsWith("mark")) {
-                int idx = Integer.parseInt(input.substring(5));
-                this.list.get(idx - 1).markAsDone();
-                String description = "\t Nice! I've marked this task as done:" + "\n" + this.list.get(idx - 1);
-                BotMessage output = new BotMessage(description);
-                System.out.println(output);
-                continue;
-            }
-            if (input.startsWith("unmark")) {
-                int idx = Integer.parseInt(input.substring(7));
-                this.list.get(idx - 1).markAsUndone();
-                String description = "\t OK, I've marked this task as not done yet:" + "\n" + this.list.get(idx - 1);
-                BotMessage output = new BotMessage(description);
-                System.out.println(output);
-                continue;
-            }
-            if (input.startsWith("todo")) {
-                Todo todo = new Todo(input.substring(5).trim());
-                this.list.add(todo);
-                String response = this.handler.handleInput(todo, this.list);
+            try {
+                String input = this.handler.getInput();
+                if (input.equals("bye")) {
+                    System.out.println(this.ending);
+                    break;
+                }
+                if (input.equals("list")) {
+                    String description = "\t Here are the tasks in your list:" + "\n" + this.printList();
+                    BotMessage output = new BotMessage(description);
+                    System.out.println(output);
+                    continue;
+                }
+                if (input.startsWith("mark")) {
+                    int idx = Integer.parseInt(input.substring(5));
+                    this.list.get(idx - 1).markAsDone();
+                    String description = "\t Nice! I've marked this task as done:" + "\n" + this.list.get(idx - 1);
+                    BotMessage output = new BotMessage(description);
+                    System.out.println(output);
+                    continue;
+                }
+                if (input.startsWith("unmark")) {
+                    int idx = Integer.parseInt(input.substring(7));
+                    this.list.get(idx - 1).markAsUndone();
+                    String description = "\t OK, I've marked this task as not done yet:" + "\n" + this.list.get(idx - 1);
+                    BotMessage output = new BotMessage(description);
+                    System.out.println(output);
+                    continue;
+                }
+
+                // Any other input
+                String response = this.handler.handleInput(input, list);
                 BotMessage output = new BotMessage(response);
                 System.out.println(output);
-                continue;
+
+            } catch (TodoException e) {
+                BotMessage message = new BotMessage(e.getMessage());
+                System.out.println(message);
+            } catch (FridayException e) {
+                BotMessage message = new BotMessage(e.getMessage());
+                System.out.println(message);
             }
-            if (input.startsWith("deadline")) {
-                int end = input.indexOf("/by");
-                Deadline deadline = new Deadline(input.substring(9, end).trim(), input.substring(end + 3).trim());
-                this.list.add(deadline);
-                String response = this.handler.handleInput(deadline, this.list);
-                BotMessage output = new BotMessage(response);
-                System.out.println(output);
-                continue;
-            }
-            if (input.startsWith("event")) {
-                int eventIndex = input.indexOf("event") + "event".length();
-                int fromIndex = input.indexOf("/from");
-                int toIndex = input.indexOf("/to");
-                Event event = new Event(input.substring(eventIndex, fromIndex).trim(),
-                                        input.substring(fromIndex + "/from".length(), toIndex).trim(),
-                                        input.substring(toIndex + "/to".length()).trim());
-                this.list.add(event);
-                String response = this.handler.handleInput(event, this.list);
-                BotMessage output = new BotMessage(response);
-                System.out.println(output);
-                continue;
-            }
-        }
+        } // end of loop
     }
     public static void main(String[] args) {
         Friday bot = new Friday();
