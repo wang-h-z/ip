@@ -3,7 +3,7 @@ import java.util.*;
 public class UserInputHandler {
 
     private final Scanner scanner;
-    private final Set<String> validCommands = new HashSet<>(Arrays.asList("bye", "list", "unmark", "unmark", "todo", "deadline", "event"));
+    private final Set<String> validCommands = new HashSet<>(Arrays.asList("bye", "list", "unmark", "unmark", "todo", "deadline", "event", "delete"));
     private final String ending = """
              \t  Bye. Hope to see you again soon!""";
 
@@ -22,6 +22,7 @@ public class UserInputHandler {
     }
 
     public String handleInput(String input, ArrayList<Task> list)  throws FridayException {
+
         Task task = null;
 
         if (input.startsWith("todo")) {
@@ -45,6 +46,16 @@ public class UserInputHandler {
                     input.substring(toIndex + "/to".length()).trim());
             list.add(task);
         }
+
+        if (input.startsWith("delete")) {
+            int idx = Integer.parseInt(input.substring(6).trim()) - 1;
+            Task r = list.remove(idx);
+            return String.format(""" 
+            \t Got it. I've removed this task:
+            \t  %s
+            \t Now you have %d tasks in the list.""", r, list.size());
+        }
+
         return String.format(""" 
             \t Got it. I've added this task:
             \t  %s
