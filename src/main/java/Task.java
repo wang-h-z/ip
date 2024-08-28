@@ -24,4 +24,17 @@ public class Task {
             return String.format("[%s] %s", this.getStatusIcon(), this.description);
         }
 
+    public static Task fromString(String str) {
+        // Check the task type and delegate to the appropriate subclass
+        if (str.startsWith("[T]")) {
+            return Todo.fromString(str);
+        } else if (str.startsWith("[D]")) {
+            return Deadline.fromString(str);
+        } else if (str.startsWith("[E]")) {
+            return Event.fromString(str);
+        } else {
+            throw new IllegalArgumentException("Unknown task type: " + str);
+        }
+    }
+
 }

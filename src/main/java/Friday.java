@@ -11,13 +11,17 @@ public class Friday {
     private final UserInputHandler handler;
     private ArrayList<Task> list;
 
+    private Storage storage;
+
     public Friday() {
         this.handler = new UserInputHandler();
         this.list = new ArrayList<>();
+        this.storage = new Storage();
     }
 
     public void start() {
         System.out.println(header);
+        storage.loadTasks(list);
         while (true) {
             try {
                 String input = this.handler.getInput();
@@ -25,7 +29,7 @@ public class Friday {
                     System.out.println(this.ending);
                     break;
                 }
-                String response = this.handler.handleInput(input, list);
+                String response = this.handler.handleInput(input, list, storage);
                 BotMessage output = new BotMessage(response);
                 System.out.println(output);
             } catch (FridayException e) {

@@ -38,7 +38,7 @@ public class UserInputHandler {
         return items;
     }
 
-    public String handleInput(String input, ArrayList<Task> list)  throws FridayException {
+    public String handleInput(String input, ArrayList<Task> list, Storage storage)  throws FridayException {
 
         String[] parts = input.trim().split(" ", 2);
         Command command = Command.fromString(parts[0]);
@@ -53,11 +53,13 @@ public class UserInputHandler {
             case MARK:
                 idx = Integer.parseInt(input.substring(5).trim());
                 list.get(idx - 1).markAsDone();
+                storage.saveTasks(list);
                 return "\t Nice! I've marked this task as done:" + "\n" + "\t  " + list.get(idx - 1);
 
             case UNMARK:
                 idx = Integer.parseInt(input.substring(7).trim());
                 list.get(idx - 1).markAsUndone();
+                storage.saveTasks(list);
                 return "\t OK, I've marked this task as not done yet:" + "\n" + "\t  " + list.get(idx - 1);
 
             case TODO:
@@ -66,6 +68,7 @@ public class UserInputHandler {
                     }
                     task = new Todo(input.substring(5).trim());
                     list.add(task);
+                    storage.saveTasks(list);
                     return String.format(""" 
                         \t Got it. I've added this task:
                         \t  %s
@@ -87,6 +90,7 @@ public class UserInputHandler {
                 }
                 task = new Deadline(deadlineDescription, deadline);
                 list.add(task);
+                storage.saveTasks(list);
                 return String.format(""" 
                     \t Got it. I've added this task:
                     \t  %s
@@ -118,6 +122,7 @@ public class UserInputHandler {
                 }
                 task = new Event(eventDescription, from, to);
                 list.add(task);
+                storage.saveTasks(list);
                 return String.format(""" 
                     \t Got it. I've added this task:
                     \t  %s
@@ -137,6 +142,7 @@ public class UserInputHandler {
                     throw new FridayException("Attempting to delete item which is not in the list. Please ensure the number is correct.");
                 }
                 Task r = list.remove(idx);
+                storage.saveTasks(list);
                 return String.format(""" 
                         \t Got it. I've removed this task:
                         \t  %s
