@@ -1,0 +1,4 @@
+[T][ ] Task 1
+[T][ ] Task 2
+[D][ ] Task 3 (by: Sundayu)
+[E][ ] Task 4 (from: Monday to: Friday)
