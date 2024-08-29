@@ -3,9 +3,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
-public class UserInputHandler {
+public class Parser {
 
-    private final Scanner scanner;
     private enum Command {
         LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, DATE, UNKNOWN;
 
@@ -17,15 +16,8 @@ public class UserInputHandler {
             }
         }
     }
-    public UserInputHandler() {
-        this.scanner = new Scanner(System.in);
-    }
 
-    public String getInput() throws InputException {
-        return this.scanner.nextLine();
-    }
-
-    public String printList(ArrayList<Task> list) {
+    public String printList(TaskList list) {
         String items = "";
         if (list.isEmpty()) {
             return "\t  There are currently no items in your list.";
@@ -41,7 +33,7 @@ public class UserInputHandler {
         return items;
     }
 
-    public String handleInput(String input, ArrayList<Task> list, Storage storage)  throws FridayException {
+    public String handleInput(String input, TaskList list, Storage storage)  throws FridayException {
 
         String[] parts = input.trim().split(" ", 2);
         Command command = Command.fromString(parts[0]);
@@ -162,9 +154,9 @@ public class UserInputHandler {
                 } catch (IllegalArgumentException e) {
                     throw new InputException("I do not understand this format. Please try in this manner: d/M/yyyy HHmm");
                 }
-                ArrayList<Task> dateList = new ArrayList<>();
+                TaskList dateList = new TaskList();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
-                for (Task t : list) {
+                for (Task t : list.getList()) {
                     if (t instanceof Deadline) {
                         Deadline d = (Deadline) t;
                         if (d.getDate() != null && d.getDate().isBefore(userTime)) {

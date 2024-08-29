@@ -3,9 +3,13 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    private static final String FILE_PATH = "./data/Friday.txt";
+    private final String FILE_PATH;
 
-    public void loadTasks(ArrayList<Task> list) {
+    public Storage(String filepath) {
+        this.FILE_PATH = filepath;
+    }
+
+    public void loadTasks(TaskList list) {
         File file = new File(FILE_PATH);
 
         if (!file.exists()) {
@@ -28,9 +32,9 @@ public class Storage {
         }
     }
 
-    public void saveTasks(ArrayList<Task> list) {
+    public void saveTasks(TaskList list) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
-            for (Task task : list) {
+            for (Task task : list.getList()) {
                 writer.println(task.toString());
             }
         } catch (IOException e) {
