@@ -23,20 +23,14 @@ public class Friday {
         boolean isExit = false;
         this.ui.showWelcome();
         storage.loadTasks(list);
-
         while (!isExit) {
             try {
                 String input = this.ui.readCommand();
-                if (input.trim().equals("bye")) {
-                    System.out.println(this.ending);
-                    break;
-                }
-                String response = this.parser.handleInput(input, list, storage);
-                BotMessage output = new BotMessage(response);
-                System.out.println(output);
+                Command c = this.parser.parse(input, list, storage);
+                c.execute(list, ui, storage);
+                isExit = c.isExit();
             } catch (FridayException e) {
-                BotMessage message = new BotMessage(e.getMessage());
-                System.out.println(message);
+                ui.showOutput(e.getMessage());
             }
         } // end of loop
     }
