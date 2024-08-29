@@ -1,16 +1,33 @@
+import java.time.LocalDateTime;
 public class Event extends Task {
     private String from;
     private String to;
+    private LocalDateTime fromDate;
+    private LocalDateTime toDate;
 
     public Event(String description, String from, String to) {
         super(description);
         this.from = from;
         this.to = to;
+        try {
+            this.fromDate = DateTimeParser.parse(from);
+        } catch (IllegalArgumentException e) {
+            //No correct format, deadline only recorded as a String
+            this.fromDate = null;
+        } try {
+            this.toDate = DateTimeParser.parse(to);
+        } catch (IllegalArgumentException e) {
+            //No correct format, deadline only recorded as a String
+            this.toDate = null;
+        }
     }
 
+    public LocalDateTime getDate() {
+        return this.toDate;
+    }
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+        return "[E]" + super.toString() + " (from: " + DateTimeParser.format(fromDate, from) + " to: " + DateTimeParser.format(toDate, to) + ")";
     }
 
     public static Event fromString(String str) {

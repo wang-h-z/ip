@@ -1,10 +1,13 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
+
 
 public class UserInputHandler {
 
     private final Scanner scanner;
     private enum Command {
-        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, UNKNOWN;
+        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, DATE, UNKNOWN;
 
         public static Command fromString(String input) {
             try {
@@ -147,6 +150,36 @@ public class UserInputHandler {
                         \t Got it. I've removed this task:
                         \t  %s
                         \t Now you have %d tasks in the list.""", r, list.size());
+
+            case DATE:
+                String date = input.substring("date".length()).trim();
+                if (date.isEmpty()) {
+                    throw new InputException("Please give me a date. Try again.");
+                }
+                LocalDateTime userTime;
+                try {
+                    userTime = DateTimeParser.parse(date);
+                } catch (IllegalArgumentException e) {
+                    throw new InputException("I do not understand this format. Please try in this manner: d/M/yyyy HHmm");
+                }
+                ArrayList<Task> dateList = new ArrayList<>();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
+                for (Task t : list) {
+                    if (t instanceof Deadline) {
+                        Deadline d = (Deadline) t;
+                        if (d.getDate() != null && d.getDate().isBefore(userTime)) {
+                            dateList.add(d);
+                        }
+                    }
+                    if (t instanceof Event) {
+                        Event e = (Event) t;
+                        if (e.getDate() != null && e.getDate().isBefore(userTime)) {
+                            dateList.add(e);
+                        }
+                    }
+                }
+                return "\t Here are the tasks in that needs to be done by this date: " + userTime.format(formatter) +
+                        "\n" + this.printList(dateList);
 
             case UNKNOWN:
             default:

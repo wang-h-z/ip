@@ -1,15 +1,28 @@
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
 
     private String by;
+    private LocalDateTime byDate;
 
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
+        try {
+            this.byDate = DateTimeParser.parse(by);
+        } catch (IllegalArgumentException e){
+            this.byDate = null;
+            //No correct format, deadline only recorded as a String
+        }
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + DateTimeParser.format(byDate, by) + ")";
+    }
+
+    public LocalDateTime getDate() {
+        return this.byDate;
     }
 
     public static Deadline fromString(String str) {
