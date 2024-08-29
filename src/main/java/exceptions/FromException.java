@@ -1,3 +1,5 @@
+package exceptions;
+
 public class FromException extends FridayException {
 
     public FromException() {

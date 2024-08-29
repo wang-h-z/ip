@@ -1,3 +1,9 @@
+package commands;
+
+import common.*;
+import storage.*;
+import ui.*;
+
 public class ByeCommand extends Command {
 
     @Override

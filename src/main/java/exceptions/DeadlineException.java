@@ -1,3 +1,5 @@
+package exceptions;
+
 public class DeadlineException extends FridayException {
 
     public DeadlineException(String task) {

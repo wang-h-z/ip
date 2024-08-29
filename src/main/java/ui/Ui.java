@@ -1,3 +1,9 @@
+package ui;
+
+import common.BotMessage;
+import common.TaskList;
+import tasks.Task;
+
 import java.util.Scanner;
 
 public class Ui {

@@ -1,3 +1,5 @@
+package exceptions;
+
 public class DescriptionException extends InputException {
 
     public DescriptionException(String task) {

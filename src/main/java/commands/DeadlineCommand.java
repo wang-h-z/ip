@@ -1,3 +1,11 @@
+package commands;
+
+import exceptions.*;
+import common.*;
+import storage.*;
+import tasks.*;
+import ui.*;
+
 public class DeadlineCommand extends Command {
 
     private final String input;

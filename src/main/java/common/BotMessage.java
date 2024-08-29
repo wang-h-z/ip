@@ -1,3 +1,5 @@
+package common;
+
 public class BotMessage {
     private final String spacing = "____________________________________________________________";
     private final String description;
