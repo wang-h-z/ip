@@ -1,14 +1,19 @@
-import commands.*;
+package ui;
+
+import commands.Command;
+
 import common.BotMessage;
 import common.TaskList;
+
 import exceptions.FridayException;
+
 import parser.Parser;
+
 import storage.Storage;
-import ui.Ui;
 
 public class Friday {
     private final BotMessage header = new BotMessage("""
-             \t  Hello! I'm Friday
+             \t  Hello! I'm ui.Friday
              \t  What can I do for you?""");
 
     private final BotMessage ending = new BotMessage("""
@@ -43,7 +48,7 @@ public class Friday {
         } // end of loop
     }
     public static void main(String[] args) {
-        Friday bot = new Friday("data/Friday.txt");
+        Friday bot = new Friday("data/ui.Friday.txt");
         bot.start();
     }
 }
