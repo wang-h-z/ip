@@ -29,6 +29,12 @@ public class Deadline extends Task {
         return this.byDate;
     }
 
+    /**
+     * Returns a Deadline object given a String that represents a Deadline task.
+     *
+     * @param str The String that represents the Deadline task.
+     * @return
+     */
     public static Deadline fromString(String str) {
         boolean isDone = str.contains("[X]");
         int byIndex = str.indexOf(" (by: ");

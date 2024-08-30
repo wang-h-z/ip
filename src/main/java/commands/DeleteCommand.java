@@ -17,6 +17,19 @@ public class DeleteCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Separates the input string to identify an index to delete an item from the list. If the index is valid, the item
+     * is deleted from the list. Storage updates the .txt file with the new list. The Ui then outputs a message to
+     * notify the user this has been done.
+     * <p>
+     * Throws InputException when there is no index in the input. Throws FridayExceptions when attempting to delete an
+     * item from an empty TaskList and when attempting to delete an item from an index which is out of bounds.
+     *
+     * @param list List which stores all Tasks in the chatbot.
+     * @param ui The interface which the user will be interacting with.
+     * @param storage Stores previous and current Task objects.
+     * @throws FridayException
+     */
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) throws FridayException {
         String i = input.substring("delete".length()).trim();
@@ -35,6 +48,11 @@ public class DeleteCommand extends Command {
         ui.deleteOutput(task, list);
     }
 
+    /**
+     * Returns false as a DeleteCommand does not stop the chatbot.
+     *
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;

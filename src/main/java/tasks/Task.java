@@ -24,6 +24,14 @@ public class Task {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
     }
 
+    /**
+     * Returns a Task given a String representing a Task.
+     *
+     * An IllegalArgumentException is thrown if the input string is not recognizable.
+     *
+     * @param str The String that represents a Task.
+     * @return
+     */
     public static Task fromString(String str) {
         // Check the task type and delegate to the appropriate subclass
         if (str.startsWith("[T]")) {

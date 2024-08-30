@@ -32,6 +32,14 @@ public class Friday {
         this.storage = new Storage(filepath);
     }
 
+    /**
+     * A method to run the chatbot. The chatbot continuously receieves user input through the readCommand() method and
+     * is parsed through the Parser object and a Command object is returned. The Command is always executed and
+     * determines whether the chatbot should be stopped using isExit().
+     *
+     * A FridayException is caught when any point in the bot logic throws a FridayException or a subclass of the
+     * Exception. 
+     */
     public void start() {
         boolean isExit = false;
         this.ui.showWelcome();
