@@ -9,7 +9,7 @@ import tasks.*;
 public class Parser {
 
     private enum CommandEnum {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, DATE, UNKNOWN;
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, DATE, FIND, UNKNOWN;
 
         public static CommandEnum fromString(String input) {
             try {
@@ -56,6 +56,9 @@ public class Parser {
 
             case DATE:
                 return new DateCommand(input);
+
+            case FIND:
+                return new FindCommand(input);
 
             case UNKNOWN:
             default:

@@ -29,4 +29,14 @@ public class TaskList {
     public Task get(int i) {
         return this.list.get(i);
     }
+
+    public TaskList findTasks(String keyword) {
+        TaskList filtered = new TaskList();
+        for (Task task : this.list) {
+            if (task.getDescription().contains(keyword)) {
+                filtered.add(task);
+            }
+        }
+        return filtered;
+    }
 }

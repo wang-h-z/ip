@@ -1,6 +1,7 @@
-[D][ ] tasks.Task (by: Dec 02 2019, 6:00 pm)
-[E][ ] tasks.Task (from: Dec 02 2019, 6:00 pm to: Dec 02 2019, 8:00 pm)
-[D][ ] tasks.Task (by: Dec 02 2019, 12:00 am)
-[T][ ] tasks.Task
-[D][ ] tasks.Task (by: 23-02-2020 1800)
-[D][ ] tasks.Task (by: Feb 06 2002, 6:00 pm)
+[D][ ] Task (by: Dec 02 2019, 6:00 pm)
+[E][ ] Task (from: Dec 02 2019, 6:00 pm to: Dec 02 2019, 8:00 pm)
+[D][ ] Task (by: Dec 02 2019, 12:00 am)
+[T][ ] Task
+[D][ ] Task (by: 23-02-2020 1800)
+[D][ ] Task (by: Feb 06 2002, 6:00 pm)
+[T][ ] wth

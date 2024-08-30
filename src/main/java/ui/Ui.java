@@ -78,8 +78,12 @@ public class Ui {
     }
 
     public void dateOutput(String date, TaskList list) {
-        BotMessage output = new BotMessage("\t Here are the tasks in that needs to be done by this date: " + date +
-                "\n" + printList(list));
+        BotMessage output = new BotMessage("\t Here are the tasks in that needs to be done by this date: " + date + "\n" + printList(list));
+        System.out.println(output);
+    }
+
+    public void findOutput(TaskList list) {
+        BotMessage output = new BotMessage("\t Here are the matching tasks in your list:" + "\n" + this.printList(list));
         System.out.println(output);
     }
 
