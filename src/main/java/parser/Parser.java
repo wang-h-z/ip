@@ -20,22 +20,6 @@ public class Parser {
         }
     }
 
-    public String printList(TaskList list) {
-        String items = "";
-        if (list.isEmpty()) {
-            return "\t  There are currently no items in your list.";
-        }
-        for (int i = 0; i < list.size(); i++) {
-            String d = String.format("\t  %s.%s", i + 1, list.get(i));
-            if (i == list.size() - 1) {
-                items = items.concat(d);
-            } else {
-                items = items.concat(d + "\n");
-            }
-        }
-        return items;
-    }
-
     public Command parse(String input, TaskList list, Storage storage)  throws FridayException {
 
         String[] parts = input.trim().split(" ", 2);
