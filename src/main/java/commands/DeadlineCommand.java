@@ -1,10 +1,18 @@
 package commands;
 
-import exceptions.*;
-import common.*;
-import storage.*;
-import tasks.*;
-import ui.*;
+import exceptions.MissingCommandException;
+import exceptions.DescriptionException;
+import exceptions.FridayException;
+import exceptions.DeadlineException;
+
+import common.TaskList;
+
+import storage.Storage;
+
+import tasks.Task;
+import tasks.Deadline;
+
+import ui.Ui;
 
 public class DeadlineCommand extends Command {
 

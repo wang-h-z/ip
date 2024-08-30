@@ -1,9 +1,12 @@
 package commands;
 
-import exceptions.*;
-import common.*;
-import storage.*;
-import ui.*;
+import exceptions.FridayException;
+
+import common.TaskList;
+
+import storage.Storage;
+
+import ui.Ui;
 
 public abstract class Command {
     public abstract void execute(TaskList list, Ui ui, Storage storage) throws FridayException;

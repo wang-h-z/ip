@@ -1,10 +1,15 @@
 package parser;
 
 import commands.*;
-import exceptions.*;
-import common.*;
-import storage.*;
-import tasks.*;
+
+import exceptions.FridayException;
+import exceptions.InputException;
+
+import common.TaskList;
+
+import storage.Storage;
+
+import tasks.Task;
 
 public class Parser {
 

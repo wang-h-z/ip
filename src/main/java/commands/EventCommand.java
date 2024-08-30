@@ -1,10 +1,19 @@
 package commands;
 
-import exceptions.*;
-import common.*;
-import storage.*;
-import tasks.*;
-import ui.*;
+import exceptions.DescriptionException;
+import exceptions.FridayException;
+import exceptions.FromException;
+import exceptions.MissingCommandException;
+import exceptions.ToException;
+
+import common.TaskList;
+
+import storage.Storage;
+
+import tasks.Event;
+import tasks.Task;
+
+import ui.Ui;
 
 public class EventCommand extends Command {
 
