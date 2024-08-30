@@ -34,6 +34,12 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (from: " + DateTimeParser.format(fromDate, from) + " to: " + DateTimeParser.format(toDate, to) + ")";
     }
 
+    /**
+     * Returns an Event given a String that represents the Event task.
+     *
+     * @param str The String that represents the Event Task.
+     * @return
+     */
     public static Event fromString(String str) {
         boolean isDone = str.contains("[X]");
         int fromIndex = str.indexOf(" (from: ");

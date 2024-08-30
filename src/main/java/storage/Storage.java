@@ -12,6 +12,15 @@ public class Storage {
         this.FILE_PATH = filepath;
     }
 
+    /**
+     * Checks if the .txt file contains task strings exits. If the file does not exist, the relevant parent directory
+     * the .txt file itself is created. If the file exists, each line of the file is read using a BufferedReader object.
+     * Each line is then added into the TaskList.
+     * <p>
+     * Throws IOExceptions if creating the .txt file or if loading tasks fail.
+     *
+     * @param list A TaskList containing all tasks.
+     */
     public void loadTasks(TaskList list) {
         File file = new File(FILE_PATH);
 
@@ -35,6 +44,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the Tasks contained in the TaskList to a new .txt file.
+     * <p>
+     * Throws an IOException is writing to the .txt file fails.
+     *
+     * @param list A TaskList containing all tasks.
+     */
     public void saveTasks(TaskList list) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
             for (Task task : list.getList()) {

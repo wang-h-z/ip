@@ -16,6 +16,17 @@ public class DateCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Retrieves the relevant dates given by the user if the format of the input date matches one of the accepted
+     * formats in the DateTimeParser. Finally, the Ui responds by outputting a message to the terminal.
+     * <p>
+     * An InputException is thrown the date is empty. An IllegalArgumentException is thrown if the format is ambiguous.
+     *
+     * @param list List which stores all Tasks in the chatbot.
+     * @param ui The interface which the user will be interacting with.
+     * @param storage Stores previous and current Task objects.
+     * @throws FridayException
+     */
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) throws FridayException {
         String date = this.input.substring("date".length()).trim();
@@ -47,6 +58,11 @@ public class DateCommand extends Command {
         ui.dateOutput(userTime.format(formatter), list);
     }
 
+    /**
+     * Returns false as the chatbot continues running after a DateCommand.
+     *
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;

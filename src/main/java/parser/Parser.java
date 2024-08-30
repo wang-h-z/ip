@@ -20,6 +20,18 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a Command Object. The method recieved an input string and determines which CommandEnum this input belongs
+     * to. If the command given in the input string is valid, a respective command object is created and returned.
+     *<p>
+     * If the parser does not understand the input string, an InputException is thrown under the UNKOWN enum case.
+     *
+     * @param input The user input string.
+     * @param list The TaskList.
+     * @param storage Saves the tasks in a .txt file.
+     * @return Command object to be executed in the chatbot.
+     * @throws FridayException
+     */
     public Command parse(String input, TaskList list, Storage storage)  throws FridayException {
 
         String[] parts = input.trim().split(" ", 2);

@@ -9,10 +9,22 @@ import ui.*;
 public class EventCommand extends Command {
 
     private final String input;
+
     public EventCommand(String input) {
         this.input = input;
     }
 
+    /**
+     * Separates the input into a description string, a from string and a to string. If these strings are valid, an
+     * event object is created. The Event object is then added into the TaskList. Storage saves the event object
+     * into the local .txt file. The Ui outputs a message to the terminal to notify the user this has been done.
+     * <p>
+     * Throws a MissingCommandException if either /from or /to commands are missing from
+     * @param list List which stores all Tasks in the chatbot.
+     * @param ui The interface which the user will be interacting with.
+     * @param storage Stores previous and current Task objects.
+     * @throws FridayException
+     */
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) throws FridayException {
         if (!this.input.contains("/from")) {
@@ -42,6 +54,10 @@ public class EventCommand extends Command {
         ui.addTaskToListOutput(task, list);
     }
 
+    /**
+     * Returns false as an EventCommand does not stop the chatbot.
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;
