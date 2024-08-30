@@ -1,8 +1,15 @@
 package storage;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import common.TaskList;
+
 import tasks.Task;
-import java.io.*;
 
 public class Storage {
 
@@ -20,7 +27,7 @@ public class Storage {
                 file.getParentFile().mkdirs();
                 file.createNewFile();
             } catch (IOException e) {
-                System.out.println("Something went wrong trying to create the non-existing Friday.txt file: " + e.getMessage());
+                System.out.println("Something went wrong trying to create the non-existing main.Friday.txt file: " + e.getMessage());
             }
         } else {
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -30,7 +37,7 @@ public class Storage {
                     list.add(task);
                 }
             } catch (IOException e) {
-                System.out.println("Something went wrong trying to load tasks from an existing Friday.txt file: " + e.getMessage());
+                System.out.println("Something went wrong trying to load tasks from an existing main.Friday.txt file: " + e.getMessage());
             }
         }
     }
@@ -41,7 +48,7 @@ public class Storage {
                 writer.println(task.toString());
             }
         } catch (IOException e) {
-            System.out.println("Something went wrong while saving to Friday.txt: " + e.getMessage());
+            System.out.println("Something went wrong while saving to main.Friday.txt: " + e.getMessage());
         }
     }
 

@@ -1,10 +1,14 @@
 package commands;
 
-import exceptions.*;
-import common.*;
-import storage.*;
-import tasks.*;
-import ui.*;
+import exceptions.FridayException;
+import exceptions.InputException;
+import common.TaskList;
+
+import storage.Storage;
+
+import tasks.Task;
+
+import ui.Ui;
 
 public class DeleteCommand extends Command {
     private final String input;

@@ -1,8 +1,8 @@
 package commands;
 
-import common.*;
-import storage.*;
-import ui.*;
+import common.TaskList;
+import storage.Storage;
+import ui.Ui;
 
 public class ByeCommand extends Command {
 

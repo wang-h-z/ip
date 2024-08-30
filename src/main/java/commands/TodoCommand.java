@@ -1,10 +1,15 @@
 package commands;
 
-import exceptions.*;
-import common.*;
-import storage.*;
-import tasks.*;
-import ui.*;
+import exceptions.DescriptionException;
+
+import common.TaskList;
+
+import storage.Storage;
+
+import tasks.Task;
+import tasks.Todo;
+
+import ui.Ui;
 
 public class TodoCommand extends Command {
     private final String input;
