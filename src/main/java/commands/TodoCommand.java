@@ -48,4 +48,18 @@ public class TodoCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public String guiResponse(TaskList list, Storage storage) throws DescriptionException {
+        if (this.input.trim().length() == 4 || this.input.substring(5).trim().isEmpty()) {
+            throw new DescriptionException("todo");
+        }
+        Task task = new Todo(this.input.substring(5).trim());
+        list.add(task);
+        storage.saveTasks(list);
+        return String.format(""" 
+                        Got it. I've added this task:
+                          %s
+                        Now you have %d tasks in the list.""", task, list.size());
+    }
 }

@@ -39,4 +39,12 @@ public class UnmarkCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public String guiResponse(TaskList list, Storage storage) {
+        int idx = Integer.parseInt(input.substring(7).trim());
+        list.get(idx - 1).markAsUndone();
+        storage.saveTasks(list);
+        return "OK, I've marked this task as not done yet:" + "\n" + list.get(idx - 1);
+    }
 }

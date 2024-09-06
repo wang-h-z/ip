@@ -36,7 +36,7 @@ public class Storage {
                 file.getParentFile().mkdirs();
                 file.createNewFile();
             } catch (IOException e) {
-                System.out.println("Something went wrong trying to create the non-existing Friday.txt file: " + e.getMessage());
+                System.out.println("Something went wrong trying to create the non-existing ui.Friday.txt file: " + e.getMessage());
             }
         } else {
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -46,7 +46,7 @@ public class Storage {
                     list.add(task);
                 }
             } catch (IOException e) {
-                System.out.println("Something went wrong trying to load tasks from an existing Friday.txt file: " + e.getMessage());
+                System.out.println("Something went wrong trying to load tasks from an existing ui.Friday.txt file: " + e.getMessage());
             }
         }
     }
@@ -64,7 +64,7 @@ public class Storage {
                 writer.println(task.toString());
             }
         } catch (IOException e) {
-            System.out.println("Something went wrong while saving to Friday.txt: " + e.getMessage());
+            System.out.println("Something went wrong while saving to ui.Friday.txt: " + e.getMessage());
         }
     }
 

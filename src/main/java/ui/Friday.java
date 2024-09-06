@@ -13,7 +13,7 @@ import storage.Storage;
 
 public class Friday {
     private final BotMessage header = new BotMessage("""
-             \t  Hello! I'm ui.Friday
+             \t  Hello! I'm ui.ui.Friday
              \t  What can I do for you?""");
 
     private final BotMessage ending = new BotMessage("""
@@ -21,7 +21,6 @@ public class Friday {
 
     private final Parser parser;
     private TaskList list;
-
     private Storage storage;
     private Ui ui;
 
@@ -55,8 +54,19 @@ public class Friday {
             }
         } // end of loop
     }
-    public static void main(String[] args) {
-        Friday bot = new Friday("data/ui.Friday.txt");
+
+    public String getResponse(String input) {
+        try {
+            Command c = this.parser.parse(input, list, storage);
+            return c.guiResponse(list, storage);
+        } catch (FridayException e) {
+            return e.getMessage();
+        }
+    }
+
+    public static void main(String args[]) {
+        Friday bot = new Friday("data/Friday.txt");
         bot.start();
     }
+
 }

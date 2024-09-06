@@ -29,4 +29,15 @@ public class FindCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public String guiResponse(TaskList list, Storage storage) throws FridayException {
+        Ui ui = new Ui();
+        if (this.input.trim().length() == "find".length() || this.input.substring(5).trim().isEmpty()) {
+            throw new FridayException("Please give me something to find");
+        }
+        String keyword = this.input.substring(5).trim();
+        TaskList filtered = list.findTasks(keyword);
+        return "Here are the matching tasks in your list:" + "\n" + ui.printList(list);
+    }
 }

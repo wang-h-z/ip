@@ -6,6 +6,9 @@ import common.TaskList;
 
 import storage.Storage;
 
+import tasks.Task;
+
+import ui.Friday;
 import ui.Ui;
 
 public abstract class Command {
@@ -27,4 +30,6 @@ public abstract class Command {
      * @return A boolean to determine if the chatbot should stop.
      */
     public abstract boolean isExit();
+
+    public abstract String guiResponse(TaskList list, Storage storage) throws FridayException;
 }

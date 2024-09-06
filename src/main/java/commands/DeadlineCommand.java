@@ -64,4 +64,27 @@ public class DeadlineCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public String guiResponse(TaskList list, Storage storage) throws FridayException {
+        int end = this.input.indexOf("/by");
+        if (!input.contains("/by")) {
+            throw new MissingCommandException("/by");
+        }
+        String deadlineDescription = input.substring(input.indexOf("deadline") + "deadline".length(), end).trim();
+        if (deadlineDescription.isEmpty()) {
+            throw new DescriptionException("deadline");
+        }
+        String deadline = input.substring(end + 3).trim();
+        if (deadline.isEmpty()) {
+            throw new DeadlineException("deadline");
+        }
+        Task task = new Deadline(deadlineDescription, deadline);
+        list.add(task);
+        storage.saveTasks(list);
+        return String.format(""" 
+                        Got it. I've added this task:
+                          %s
+                        Now you have %d tasks in the list.""", task, list.size());
+    }
 }

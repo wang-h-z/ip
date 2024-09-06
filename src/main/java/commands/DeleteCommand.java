@@ -58,4 +58,25 @@ public class DeleteCommand extends Command {
         return false;
     }
 
+    @Override
+    public String guiResponse(TaskList list, Storage storage) throws FridayException {
+        String i = input.substring("delete".length()).trim();
+        if (i.isEmpty()) {
+            throw new InputException("Please give a valid item for me to delete. Try again.");
+        }
+        int idx = Integer.parseInt(i) - 1;
+        if (list.isEmpty()) {
+            throw new FridayException("Attempting to delete item from an empty list. Please add tasks first.");
+        }
+        if (idx >= list.size() || idx < 0) {
+            throw new FridayException("Attempting to delete item which is not in the list. Please ensure the number is correct.");
+        }
+        Task task = list.remove(idx);
+        storage.saveTasks(list);
+        return String.format(""" 
+                        Got it. I've removed this task:
+                          %s
+                        Now you have %d tasks in the list.""", task, list.size());
+    }
+
 }

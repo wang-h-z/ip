@@ -39,4 +39,12 @@ public class MarkCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public String guiResponse(TaskList list, Storage storage) {
+        int idx = Integer.parseInt(this.input.substring(5).trim());
+        list.get(idx - 1).markAsDone();
+        storage.saveTasks(list);
+        return "Nice! I've marked this task as done:" + "\n" + "\t  " + list.get(idx - 1);
+    }
 }

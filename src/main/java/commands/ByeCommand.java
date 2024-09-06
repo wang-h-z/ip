@@ -2,6 +2,7 @@ package commands;
 
 import common.TaskList;
 import storage.Storage;
+import tasks.Task;
 import ui.Ui;
 
 public class ByeCommand extends Command {
@@ -27,4 +28,10 @@ public class ByeCommand extends Command {
     public boolean isExit() {
         return true;
     }
+
+    @Override
+    public String guiResponse(TaskList list, Storage storage) {
+        return "Bye. Hope to see you again soon!";
+    }
+
 }

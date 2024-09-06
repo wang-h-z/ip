@@ -71,4 +71,36 @@ public class EventCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public String guiResponse(TaskList list, Storage storage) throws FridayException {
+        if (!this.input.contains("/from")) {
+            throw new MissingCommandException("/from");
+        }
+        if (!this.input.contains("/to")) {
+            throw new MissingCommandException("/to");
+        }
+        int eventIndex = this.input.indexOf("event") + "event".length();
+        int fromIndex = this.input.indexOf("/from");
+        int toIndex = this.input.indexOf("/to");
+        String eventDescription = this.input.substring(eventIndex, fromIndex).trim();
+        if (eventDescription.isEmpty()) {
+            throw new DescriptionException("event");
+        }
+        String from = this.input.substring(fromIndex + "/from".length(), toIndex).trim();
+        if (from.isEmpty()) {
+            throw new FromException();
+        }
+        String to = this.input.substring(toIndex + "/to".length()).trim();
+        if (to.isEmpty()) {
+            throw new ToException();
+        }
+        Task task = new Event(eventDescription, from, to);
+        list.add(task);
+        storage.saveTasks(list);
+        return String.format(""" 
+                        Got it. I've added this task:
+                          %s
+                        Now you have %d tasks in the list.""", task, list.size());
+    }
 }
