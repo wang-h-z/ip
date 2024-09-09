@@ -50,7 +50,7 @@ public class Friday {
                 c.execute(list, ui, storage);
                 isExit = c.isExit();
             } catch (FridayException e) {
-                ui.showOutput(e.getMessage());
+                ui.showOutput("\t" + e.getMessage());
             }
         } // end of loop
     }
