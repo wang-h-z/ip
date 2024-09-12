@@ -1,5 +1,10 @@
 @ECHO OFF
 
+REM Delete the data directory to remove old task data
+if exist ..\data (
+    rd /s /q ..\data
+)
+
 REM create bin directory if it doesn't exist
 if not exist ..\bin mkdir ..\bin
 
