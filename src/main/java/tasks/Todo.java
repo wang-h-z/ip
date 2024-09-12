@@ -1,5 +1,7 @@
 package tasks;
 
+import commands.PriorityCommand;
+
 public class Todo extends Task {
 
     public Todo(String description) {
@@ -20,11 +22,13 @@ public class Todo extends Task {
      */
     public static Todo fromString(String str) {
         boolean isDone = str.contains("[X]");
-        String description = str.substring(7); // Assuming "[T][X] description" format
+        String level = str.substring(4, 5);
+        String description = str.substring(9).trim(); // Assuming "[T][H][X] description" format
         Todo todo = new Todo(description);
         if (isDone) {
             todo.markAsDone();
         }
+        todo.setPriority(PriorityCommand.priorityString(level));
         return todo;
     }
 }
