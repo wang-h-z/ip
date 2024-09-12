@@ -2,6 +2,8 @@ package tasks;
 
 import java.time.LocalDateTime;
 
+import commands.PriorityCommand;
+
 import common.DateTimeParser;
 
 public class Event extends Task {
@@ -46,15 +48,18 @@ public class Event extends Task {
      */
     public static Event fromString(String str) {
         boolean isDone = str.contains("[X]");
+        String level = str.substring(4, 5);
         int fromIndex = str.indexOf(" (from: ");
         int toIndex = str.indexOf(" to: ", fromIndex);
-        String description = str.substring(7, fromIndex);
-        String from = str.substring(fromIndex + 8, toIndex);
-        String to = str.substring(toIndex + 5, str.length() - 1);
+        String description = str.substring(9, fromIndex).trim();
+        String from = str.substring(fromIndex + 8, toIndex).trim();
+        String to = str.substring(toIndex + 5, str.length() - 1).trim();
         Event event = new Event(description, from, to);
         if (isDone) {
             event.markAsDone();
         }
+        event.setPriority(PriorityCommand.priorityString(level));
         return event;
     }
+
 }

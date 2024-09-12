@@ -14,7 +14,7 @@ import tasks.Task;
 public class Parser {
 
     private enum CommandEnum {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, DATE, FIND, UNKNOWN;
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, DATE, FIND, PRIORITY, UNKNOWN;
 
         public static CommandEnum fromString(String input) {
             try {
@@ -67,7 +67,6 @@ public class Parser {
             case EVENT:
                 return new EventCommand(input);
 
-            //Logic for Delete command
             case DELETE:
                 return new DeleteCommand(input);
 
@@ -76,6 +75,9 @@ public class Parser {
 
             case FIND:
                 return new FindCommand(input);
+
+            case PRIORITY:
+                return new PriorityCommand(input);
 
             case UNKNOWN:
             default:
