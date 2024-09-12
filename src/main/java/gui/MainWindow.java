@@ -34,7 +34,14 @@ public class MainWindow extends AnchorPane {
 
     /** Injects the Duke instance */
     public void setFriday(Friday f) {
-        friday = f;
+        this.friday = f;
+        String welcomeMessage = """
+               Hello! I'm Friday
+               What can I do for you?""";
+        dialogContainer.getChildren().add(
+                DialogBox.getFridayDialog(welcomeMessage, dukeImage)
+        );
+        this.friday.guiStart();
     }
 
     /**
@@ -47,7 +54,7 @@ public class MainWindow extends AnchorPane {
         String response = friday.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getFridayDialog(response, dukeImage)
         );
         userInput.clear();
     }
