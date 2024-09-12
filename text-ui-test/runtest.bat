@@ -3,13 +3,23 @@
 REM Print the current working directory for debugging
 echo Current Directory: %cd%
 
+REM Print the current working directory for debugging
+echo Current Directory: %cd%
+
 REM Delete the data directory to remove old task data
 if exist ..\data (
     echo Deleting data directory...
-    rd /s /q D:\a\ip\ip\data
-    echo Data directory deleted.
+    rd /s /q ..\data
+)
+echo Recreating data directory...
+mkdir ..\data
+
+REM Ensure the directory is deleted and check for locks
+if exist ..\data (
+    echo Error: Data directory still exists after deletion!
+    exit /b 1
 ) else (
-    echo Data directory not found.
+    echo Data directory successfully deleted and recreated.
 )
 
 REM create bin directory if it doesn't exist
