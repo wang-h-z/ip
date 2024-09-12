@@ -42,7 +42,7 @@ public class TaskList {
         TaskList filteredList = new TaskList();
         ArrayList<Task> filtered = new ArrayList<>(this.list.stream()
                                        .filter(task -> task.getDescription()
-                                       .contains(keyword)).collect(Collectors.toList()));
+                                       .contains(keyword)).collect(Collectors.toCollection(ArrayList::new)));
         filteredList.setList(filtered);
         return filteredList;
     }
