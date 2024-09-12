@@ -12,8 +12,11 @@ public class Event extends Task {
 
     public Event(String description, String from, String to) {
         super(description);
+        assert !description.isEmpty() : "Your description should not be empty.";
         this.from = from;
+        assert !from.isEmpty(): "The /from String should not be empty.";
         this.to = to;
+        assert !to.isEmpty(): "The /to String should not be empty.";
         try {
             this.fromDate = DateTimeParser.parse(from);
         } catch (IllegalArgumentException e) {

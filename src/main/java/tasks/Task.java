@@ -7,6 +7,7 @@ public class Task {
 
     public Task(String description) {
             this.description = description;
+            assert !this.description.isEmpty() : "The description should not be empty.";
             this.isDone = false;
     }
 

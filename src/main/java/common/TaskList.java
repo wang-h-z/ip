@@ -29,6 +29,7 @@ public class TaskList {
     }
 
     public Task get(int i) {
+        assert i >= 0: "index should be greater than 0";
         return this.list.get(i);
     }
 
