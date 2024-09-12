@@ -1,5 +1,8 @@
 @ECHO OFF
 
+REM Change directory to where the script is located (optional, depending on CI setup)
+cd %~dp0
+
 REM Delete the data directory to remove old task data
 if exist ..\data (
     rd /s /q ..\data
