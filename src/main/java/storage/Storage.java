@@ -31,7 +31,6 @@ public class Storage {
     public void loadTasks(TaskList list) {
         File file = new File(FILE_PATH);
         if (!file.exists()) {
-            System.out.println("Making new file lol.");
             try {
                 file.getParentFile().mkdirs();
                 file.createNewFile();
@@ -39,7 +38,6 @@ public class Storage {
                 System.out.println("Something went wrong trying to create the non-existing ui.Friday.txt file: " + e.getMessage());
             }
         } else {
-            System.out.println("Loading tasks from: " + FILE_PATH);
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String line;
                 while ((line = reader.readLine()) != null) {

@@ -35,6 +35,22 @@ jobs:
       - name: Build and check with Gradle
         run: ./gradlew check
 
+      - name: Delete data directory on Linux
+        if: runner.os == 'Linux'
+        working-directory: ${{ github.workspace }}/text-ui-test
+        run: if [ -d "./data" ]; then rm -rf ./data; fi
+
+      - name: Delete data directory on MacOS
+        if: runner.os == 'macOS'
+        working-directory: ${{ github.workspace }}/text-ui-test
+        run: if [ -d "./data" ]; then rm -rf ./data; fi
+
+      - name: Delete data directory on Windows
+        if: runner.os == 'Windows'
+        working-directory: ${{ github.workspace }}/text-ui-test
+        shell: cmd
+        run: if exist .\data rd /s /q .\data
+
       - name: Perform IO redirection test (*NIX)
         if: runner.os == 'Linux'
         working-directory:  ${{ github.workspace }}/text-ui-test
