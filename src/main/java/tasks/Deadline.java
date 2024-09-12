@@ -15,8 +15,7 @@ public class Deadline extends Task {
         try {
             this.byDate = DateTimeParser.parse(by);
         } catch (IllegalArgumentException e){
-            this.byDate = null;
-            //No correct format, deadline only recorded as a String
+            this.byDate = null; //No correct format, deadline only recorded as a String
         }
     }
 
