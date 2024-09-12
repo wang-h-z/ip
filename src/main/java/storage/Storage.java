@@ -30,7 +30,6 @@ public class Storage {
      */
     public void loadTasks(TaskList list) {
         File file = new File(FILE_PATH);
-
         if (!file.exists()) {
             try {
                 file.getParentFile().mkdirs();
