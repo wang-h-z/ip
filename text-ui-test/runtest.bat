@@ -7,6 +7,7 @@ REM Delete the data directory to remove old task data
 if exist ..\data (
     echo Deleting data directory...
     rd /s /q ..\data
+    echo Data directory deleted.
 ) else (
     echo Data directory not found.
 )
