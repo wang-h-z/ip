@@ -1,39 +1,5 @@
 @ECHO OFF
 
-REM Print the current working directory for debugging
-echo Current Directory: %cd%
-
-REM Delete the data directory to remove old task data
-if exist ..\data (
-    echo Deleting data directory...
-    REM Use rmdir with /s /q flags to forcefully remove directory and its contents
-    rmdir /s /q ..\data
-    REM Wait for a moment to ensure deletion is complete
-    timeout /t 2 /nobreak > nul
-)
-
-REM Ensure the directory is deleted
-if exist ..\data (
-    echo Error: Data directory still exists after deletion!
-    echo Attempting to force delete...
-    REM Try to force delete using del /f /s /q
-    del /f /s /q ..\data\*.*
-    rmdir /s /q ..\data
-    timeout /t 2 /nobreak > nul
-    if exist ..\data (
-        echo Error: Unable to delete data directory. Exiting.
-        exit /b 1
-    )
-)
-
-REM Ensure the directory is deleted and check for locks
-if exist ..\data (
-    echo Error: Data directory still exists after deletion!
-    exit /b 1
-) else (
-    echo Data directory successfully deleted and recreated.
-)
-
 REM create bin directory if it doesn't exist
 if not exist ..\bin mkdir ..\bin
 
