@@ -11,8 +11,6 @@ if exist ..\data (
     echo Deleting data directory...
     rd /s /q ..\data
 )
-echo Recreating data directory...
-mkdir ..\data
 
 REM Ensure the directory is deleted and check for locks
 if exist ..\data (
@@ -21,6 +19,8 @@ if exist ..\data (
 ) else (
     echo Data directory successfully deleted and recreated.
 )
+echo Recreating data directory...
+mkdir ..\data
 
 REM create bin directory if it doesn't exist
 if not exist ..\bin mkdir ..\bin
