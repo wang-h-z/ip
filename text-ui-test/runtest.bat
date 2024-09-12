@@ -6,25 +6,24 @@ echo Current Directory: %cd%
 REM Delete the data directory to remove old task data
 if exist ..\data (
     echo Deleting data directory...
-    REM Use robocopy to empty the directory first
-    robocopy /MIR ..\empty_dir ..\data
-    REM Then remove the directory
-    rd /s /q ..\data
+    REM Use rmdir with /s /q flags to forcefully remove directory and its contents
+    rmdir /s /q ..\data
+    REM Wait for a moment to ensure deletion is complete
+    timeout /t 2 /nobreak > nul
 )
 
-REM Ensure the directory is deleted and check for locks
+REM Ensure the directory is deleted
 if exist ..\data (
     echo Error: Data directory still exists after deletion!
     echo Attempting to force delete...
     REM Try to force delete using del /f /s /q
     del /f /s /q ..\data\*.*
-    rd /s /q ..\data
+    rmdir /s /q ..\data
+    timeout /t 2 /nobreak > nul
     if exist ..\data (
         echo Error: Unable to delete data directory. Exiting.
         exit /b 1
     )
-) else (
-    echo Data directory successfully deleted.
 )
 
 REM Ensure the directory is deleted and check for locks
