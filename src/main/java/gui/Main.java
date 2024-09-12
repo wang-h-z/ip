@@ -15,7 +15,7 @@ import ui.Friday;
  */
 public class Main extends Application {
 
-    private Friday duke = new Friday("data/Friday.txt");
+    private Friday friday = new Friday("data/Friday.txt");
 
     @Override
     public void start(Stage stage) {
@@ -24,7 +24,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setFriday(duke);  // inject the Duke instance
+            fxmlLoader.<MainWindow>getController().setFriday(friday);  // inject the Duke instance
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -55,6 +55,10 @@ public class Friday {
         } // end of loop
     }
 
+    public void guiStart() {
+        this.storage.loadTasks(list);
+    }
+
     public String getResponse(String input) {
         try {
             Command c = this.parser.parse(input, list, storage);
