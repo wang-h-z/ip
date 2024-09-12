@@ -1,11 +1,14 @@
 @ECHO OFF
 
-REM Change directory to where the script is located (optional, depending on CI setup)
-cd %~dp0
+REM Print the current working directory for debugging
+echo Current Directory: %cd%
 
 REM Delete the data directory to remove old task data
 if exist ..\data (
+    echo Deleting data directory...
     rd /s /q ..\data
+) else (
+    echo Data directory not found.
 )
 
 REM create bin directory if it doesn't exist
