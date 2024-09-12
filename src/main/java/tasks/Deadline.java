@@ -11,12 +11,13 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) {
         super(description);
+        assert !description.isEmpty() : "Your description should not be empty.";
         this.by = by;
+        assert !by.isEmpty() : "Your deadline should not be empty.";
         try {
             this.byDate = DateTimeParser.parse(by);
         } catch (IllegalArgumentException e){
-            this.byDate = null;
-            //No correct format, deadline only recorded as a String
+            this.byDate = null; //No correct format, deadline only recorded as a String
         }
     }
 

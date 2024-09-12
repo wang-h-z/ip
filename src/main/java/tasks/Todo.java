@@ -4,6 +4,7 @@ public class Todo extends Task {
 
     public Todo(String description) {
         super(description);
+        assert !description.isEmpty() : "The description should not be empty.";
     }
 
     @Override
