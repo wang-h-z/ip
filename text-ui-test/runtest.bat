@@ -3,13 +3,28 @@
 REM Print the current working directory for debugging
 echo Current Directory: %cd%
 
-REM Print the current working directory for debugging
-echo Current Directory: %cd%
-
 REM Delete the data directory to remove old task data
 if exist ..\data (
     echo Deleting data directory...
+    REM Use robocopy to empty the directory first
+    robocopy /MIR ..\empty_dir ..\data
+    REM Then remove the directory
     rd /s /q ..\data
+)
+
+REM Ensure the directory is deleted and check for locks
+if exist ..\data (
+    echo Error: Data directory still exists after deletion!
+    echo Attempting to force delete...
+    REM Try to force delete using del /f /s /q
+    del /f /s /q ..\data\*.*
+    rd /s /q ..\data
+    if exist ..\data (
+        echo Error: Unable to delete data directory. Exiting.
+        exit /b 1
+    )
+) else (
+    echo Data directory successfully deleted.
 )
 
 REM Ensure the directory is deleted and check for locks
@@ -19,8 +34,6 @@ if exist ..\data (
 ) else (
     echo Data directory successfully deleted and recreated.
 )
-echo Recreating data directory...
-mkdir ..\data
 
 REM create bin directory if it doesn't exist
 if not exist ..\bin mkdir ..\bin
