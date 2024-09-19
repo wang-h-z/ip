@@ -1,8 +1,2 @@
-[T][H][ ] Task 1
-[T][M][ ] Task 2
-[D][ ][ ] Task 3 (by: today)
-[D][L][ ] Task 4 (by: today)
-[E][ ][ ] Task 5 (from: today to: today)
-[E][ ][ ] Task 6 (from: today to: today)
-[T][ ][ ] Task 10
-[T][ ][ ] Task 11
+[T][ ][ ] Buy Chocolate for Pepper
+[E][ ][ ] Avengers Assemble (from: Sep 20 2024, 6:00 PM to: Sep 20 2024, 8:00 PM)
