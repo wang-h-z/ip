@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 import ui.Friday;
 
 /**
@@ -50,6 +51,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        userInput.setPromptText("Enter your commands here.");
         String input = userInput.getText();
         String response = friday.getResponse(input);
         dialogContainer.getChildren().addAll(
