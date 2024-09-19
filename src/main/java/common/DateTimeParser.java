@@ -10,9 +10,6 @@ public class DateTimeParser {
             Locale.US);
     private static final DateTimeFormatter[] FORMATTERS = {
             DateTimeFormatter.ofPattern("d/M/yyyy HHmm"),       // e.g., 2/12/2019 1800
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),    // e.g., 2019-12-02 18:00
-            DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"),    // e.g., 02-12-2019 18:00
-            DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"),  // e.g., 2019/12/02 18:00:00
             DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a"), //e.g., Dec 02 2019, 6:00 pm [required]
     };
 
@@ -23,14 +20,26 @@ public class DateTimeParser {
      * @param dateTimeStr The string that contains the user input.
      * @return
      */
-    public static LocalDateTime parse(String dateTimeStr) {
+    public static LocalDateTime parse(String dateTimeStr) throws IllegalArgumentException {
+        if (dateTimeStr == null) {
+            throw new IllegalArgumentException("Input date-time string cannot be null");
+        }
         for (DateTimeFormatter formatter : FORMATTERS) {
-            try {
-                return LocalDateTime.parse(dateTimeStr, formatter);
-            } catch (DateTimeParseException e) {
+            LocalDateTime result = parseWithFormatter(dateTimeStr, formatter);
+            if (result != null) {
+                return result;
             }
         }
+
         throw new IllegalArgumentException("Date-time string is not in a recognized format: " + dateTimeStr);
+    }
+
+    private static LocalDateTime parseWithFormatter(String dateTimeStr, DateTimeFormatter formatter) {
+        try {
+            return LocalDateTime.parse(dateTimeStr, formatter);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
     }
 
     /**

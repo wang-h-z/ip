@@ -93,18 +93,20 @@ public class DateCommand extends Command {
             if (t instanceof Deadline) {
                 Deadline d = (Deadline) t;
                 if (d.getDate() != null && d.getDate().isBefore(userTime)) {
+                    System.out.println(d.getDate());
                     dateList.add(d);
                 }
             }
             if (t instanceof Event) {
                 Event e = (Event) t;
                 if (e.getDate() != null && e.getDate().isBefore(userTime)) {
+                    System.out.println(e.getDate());
                     dateList.add(e);
                 }
             }
         }
 
         return String.format("Here are the tasks in that needs to be done by this date: "
-                + date + "\n" + ui.printList(list));
+                + date + "\n" + ui.printList(dateList));
     }
 }
