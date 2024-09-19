@@ -37,7 +37,8 @@ public class MainWindow extends AnchorPane {
     public void setFriday(Friday f) {
         this.friday = f;
         String welcomeMessage = """
-               Hello! I'm Friday
+               WELCOME TO STARK INDUSTRIES.
+               Hello there! I'm Friday
                What can I do for you?""";
         dialogContainer.getChildren().add(
                 DialogBox.getFridayDialog(welcomeMessage, dukeImage)
