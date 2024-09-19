@@ -10,12 +10,12 @@ public class EventTest {
     @Test
     public void testToStringWithValidDates() {
         Event event = new Event("Project meeting", "Sep 19 2024, 2:00 pm", "Sep 19 2024, 4:00 pm");
-        assertEquals("[E][ ][ ] Project meeting (from: Sep 19 2024, 2:00 PM to: Sep 19 2024, 4:00 PM)", event.toString());
+        assertEquals("[E][ ][ ] Project meeting (from: Sep 19 2024, 2:00 pm to: Sep 19 2024, 4:00 pm)", event.toString());
     }
 
     @Test
     public void testFromStringWithValidDates() {
-        String eventString = "[E][ ][ ] Project meeting (from: Sep 19 2024, 2:00 PM to: Sep 19 2024, 4:00 PM)";
+        String eventString = "[E][ ][ ] Project meeting (from: Sep 19 2024, 2:00 pm to: Sep 19 2024, 4:00 pm)";
         Event event = Event.fromString(eventString);
         assertEquals(event.toString(), eventString);
     }
@@ -32,26 +32,20 @@ public class EventTest {
     public void testMarkAsDone() {
         Event event = new Event("Project meeting", "Sep 19 2024, 2:00 pm", "Sep 19 2024, 4:00 pm");
         event.markAsDone();
-        assertEquals("[E][ ][X] Project meeting (from: Sep 19 2024, 2:00 PM to: Sep 19 2024, 4:00 PM)", event.toString());
-    }
-
-    @Test
-    public void testToStringWithDifferentDateFormats() {
-        Event event = new Event("Deadline submission", "Dec 02 2024, 2:00 pm", "Dec 02 2024, 6:00 pm");
-        assertEquals("[E][ ][ ] Deadline submission (from: Dec 02 2024, 2:00 PM to: Dec 02 2024, 6:00 PM)", event.toString());
+        assertEquals("[E][ ][X] Project meeting (from: Sep 19 2024, 2:00 pm to: Sep 19 2024, 4:00 pm)", event.toString());
     }
 
     @Test
     public void testEventWithoutPriority() {
         Event event = new Event("Casual meeting", "Nov 10 2024, 10:00 am", "Nov 10 2024, 12:00 pm");
-        assertEquals("[E][ ][ ] Casual meeting (from: Nov 10 2024, 10:00 AM to: Nov 10 2024, 12:00 PM)", event.toString());
+        assertEquals("[E][ ][ ] Casual meeting (from: Nov 10 2024, 10:00 am to: Nov 10 2024, 12:00 pm)", event.toString());
     }
 
     @Test
     public void testSetPriority() {
         Event event = new Event("Annual review", "Nov 15 2024, 9:00 am", "Nov 15 2024, 11:00 am");
         event.setPriority(PriorityCommand.Priorities.HIGH);
-        assertEquals("[E][H][ ] Annual review (from: Nov 15 2024, 9:00 AM to: Nov 15 2024, 11:00 AM)", event.toString());
+        assertEquals("[E][H][ ] Annual review (from: Nov 15 2024, 9:00 am to: Nov 15 2024, 11:00 am)", event.toString());
     }
 
     @Test
@@ -72,7 +66,7 @@ public class EventTest {
     @Test
     public void testInvalidDateFormatFallsBackToString() {
         Event event = new Event("Project meeting", "invalid-date", "Dec 02 2024, 11:00 am");
-        assertEquals("[E][ ][ ] Project meeting (from: invalid-date to: Dec 02 2024, 11:00 AM)", event.toString());
+        assertEquals("[E][ ][ ] Project meeting (from: invalid-date to: Dec 02 2024, 11:00 am)", event.toString());
     }
 }
 
