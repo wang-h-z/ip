@@ -81,7 +81,7 @@ public class Parser {
 
             case UNKNOWN:
             default:
-                throw new InputException("Sorry, I have honestly 0 clue what you are saying... T.T");
+                throw new InputException("Sorry, I do not understand this command.");
         }
     }
 }
