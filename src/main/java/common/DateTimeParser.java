@@ -3,14 +3,15 @@ package common;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 public class DateTimeParser {
-    private static final DateTimeFormatter CUSTOM_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
+    private static final DateTimeFormatter CUSTOM_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a",
+            Locale.US);
     private static final DateTimeFormatter[] FORMATTERS = {
             DateTimeFormatter.ofPattern("d/M/yyyy HHmm"),       // e.g., 2/12/2019 1800
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),    // e.g., 2019-12-02 18:00
             DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"),    // e.g., 02-12-2019 18:00
-            DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a"),  // e.g., 12/02/2019 06:00 PM
             DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"),  // e.g., 2019/12/02 18:00:00
             DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a"), //e.g., Dec 02 2019, 6:00 pm [required]
     };

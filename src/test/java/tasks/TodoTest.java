@@ -1,20 +1,63 @@
 package tasks;
 
+import commands.PriorityCommand;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TodoTest {
 
     @Test
     public void toStringTest() {
-        assertEquals("[T][ ][ ] test", new Todo("test").toString());
+        Todo todo = new Todo("buy milk");
+        assertEquals("[T][ ][ ] buy milk", todo.toString(),
+                "The toString method should return the correct format");
     }
 
     @Test
-    public void fromStringTest() {
-        assertEquals(new Todo("test").toString(), "[T][ ][ ] test");
+    public void fromStringTestNotDone() {
+        Todo todo = Todo.fromString("[T][ ][ ] buy milk");
+        assertEquals("[T][ ][ ] buy milk", todo.toString(),
+                "The fromString method should correctly parse a Todo that is not done");
     }
 
+    @Test
+    public void fromStringTestDone() {
+        Todo todo = Todo.fromString("[T][ ][X] buy milk");
+        assertTrue(todo.isDone(), "The Todo should be marked as done when [X] is present");
+        assertEquals("[T][ ][X] buy milk", todo.toString(),
+                "The fromString method should correctly parse a Todo that is done");
+    }
 
+    @Test
+    public void fromStringTestWithPriority() {
+        Todo todo = Todo.fromString("[T][H][ ] buy milk");
+        assertEquals("H", todo.getPriority().toString(), "The priority should be set to HIGH");
+        assertEquals("[T][H][ ] buy milk", todo.toString(),
+                "The fromString method should correctly parse a Todo with HIGH priority");
+    }
+
+    @Test
+    public void markAsDoneTest() {
+        Todo todo = new Todo("buy milk");
+        todo.markAsDone();
+        assertTrue(todo.isDone(), "The task should be marked as done");
+        assertEquals("[T][ ][X] buy milk", todo.toString(),
+                "The toString method should reflect the task being done");
+    }
+
+    @Test
+    public void setPriorityTest() {
+        Todo todo = new Todo("buy milk");
+        todo.setPriority(PriorityCommand.Priorities.HIGH);
+        assertEquals("H", todo.getPriority().toString(), "The priority should be set to HIGH");
+        assertEquals("[T][H][ ] buy milk", todo.toString(),
+                "The toString method should reflect the HIGH priority");
+    }
+
+    @Test
+    public void emptyDescriptionThrowsAssertionError() {
+        // Test that an empty description throws an assertion error
+        assertThrows(AssertionError.class, () -> new Todo(""),
+                "Empty description should throw an AssertionError");
+    }
 }

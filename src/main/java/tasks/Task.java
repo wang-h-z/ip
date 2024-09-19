@@ -33,6 +33,15 @@ public class Task {
         this.isDone = false;
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    public PriorityCommand.Priorities getPriority() {
+        return this.priority;
+    }
+
+
     public void setPriority(PriorityCommand.Priorities priority) {
         this.priority = priority;
     }
