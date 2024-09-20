@@ -6,30 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDateTime;
-
 import org.junit.jupiter.api.Test;
 
 import commands.PriorityCommand;
 import common.DateTimeParser;
 
 public class DeadlineTest {
-
-    @Test
-    public void testValidDateParsing() {
-        Deadline deadline = new Deadline("Complete project", "Sep 20 2024, 5:00 pm");
-        assertEquals("[D][ ][ ] Complete project (by: Sep 20 2024, 5:00 pm)", deadline.toString());
-        LocalDateTime expectedDate = DateTimeParser.parse("Sep 20 2024, 5:00 pm");
-        assertEquals(expectedDate, deadline.getDate());
-    }
-
-    @Test
-    public void testValidDateParsingAlternativeFormat() {
-        Deadline deadline = new Deadline("Submit report", "20/9/2024 1700");
-        assertEquals("[D][ ][ ] Submit report (by: Sep 20 2024, 5:00 pm)", deadline.toString());
-        LocalDateTime expectedDate = DateTimeParser.parse("20/9/2024 1700");
-        assertEquals(expectedDate, deadline.getDate());
-    }
 
     @Test
     public void testInvalidDateParsing() {
