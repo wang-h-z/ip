@@ -38,12 +38,18 @@ public class Deadline extends Task {
      * @param str The String that represents the Deadline task.
      * @return
      */
+    /**
+     * Returns a Deadline object given a String that represents a Deadline task.
+     *
+     * @param str The String that represents the Deadline task.
+     * @return The created Deadline object.
+     */
     public static Deadline fromString(String str) {
         boolean isDone = str.contains("[X]");
-        String level = str.substring(4, 5);
-        int byIndex = str.indexOf(" (by: ");
-        String description = str.substring(9, byIndex).trim();
-        String by = str.substring(byIndex + 6, str.length() - 1).trim();
+        String level = extractPriorityLevel(str);
+        String description = extractDescription(str);
+        String by = extractByDate(str);
+
         Deadline deadline = new Deadline(description, by);
         if (isDone) {
             deadline.markAsDone();
@@ -51,4 +57,34 @@ public class Deadline extends Task {
         deadline.setPriority(PriorityCommand.priorityString(level));
         return deadline;
     }
+
+    /**
+     * Extracts the priority level from the task string.
+     * @param str The task string.
+     * @return The priority level.
+     */
+    private static String extractPriorityLevel(String str) {
+        return str.substring(4, 5);
+    }
+
+    /**
+     * Extracts the description from the task string.
+     * @param str The task string.
+     * @return The task description.
+     */
+    private static String extractDescription(String str) {
+        int byIndex = str.indexOf(" (by: ");
+        return str.substring(9, byIndex).trim();
+    }
+
+    /**
+     * Extracts the 'by' date string from the task string.
+     * @param str The task string.
+     * @return The 'by' date string.
+     */
+    private static String extractByDate(String str) {
+        int byIndex = str.indexOf(" (by: ");
+        return str.substring(byIndex + 6, str.length() - 1).trim();
+    }
 }
+

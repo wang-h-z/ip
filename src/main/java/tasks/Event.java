@@ -37,7 +37,8 @@ public class Event extends Task {
     }
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + DateTimeParser.format(fromDate, from) + " to: " + DateTimeParser.format(toDate, to) + ")";
+        return "[E]" + super.toString() + " (from: " + DateTimeParser.format(fromDate, from) + " to: "
+                + DateTimeParser.format(toDate, to) + ")";
     }
 
     /**
@@ -48,18 +49,61 @@ public class Event extends Task {
      */
     public static Event fromString(String str) {
         boolean isDone = str.contains("[X]");
-        String level = str.substring(4, 5);
-        int fromIndex = str.indexOf(" (from: ");
-        int toIndex = str.indexOf(" to: ", fromIndex);
-        String description = str.substring(9, fromIndex).trim();
-        String from = str.substring(fromIndex + 8, toIndex).trim();
-        String to = str.substring(toIndex + 5, str.length() - 1).trim();
+        String level = extractPriorityLevel(str);
+        String description = extractDescription(str);
+        String from = extractFromDate(str);
+        String to = extractToDate(str);
+
         Event event = new Event(description, from, to);
         if (isDone) {
             event.markAsDone();
         }
         event.setPriority(PriorityCommand.priorityString(level));
         return event;
+    }
+
+    /**
+     * Extracts the priority level from the event string.
+     *
+     * @param str The event string.
+     * @return The priority level.
+     */
+    private static String extractPriorityLevel(String str) {
+        return str.substring(4, 5);
+    }
+
+    /**
+     * Extracts the description from the event string.
+     *
+     * @param str The event string.
+     * @return The event description.
+     */
+    private static String extractDescription(String str) {
+        int fromIndex = str.indexOf(" (from: ");
+        return str.substring(9, fromIndex).trim();
+    }
+
+    /**
+     * Extracts the 'from' date string from the event string.
+     *
+     * @param str The event string.
+     * @return The 'from' date string.
+     */
+    private static String extractFromDate(String str) {
+        int fromIndex = str.indexOf(" (from: ");
+        int toIndex = str.indexOf(" to: ", fromIndex);
+        return str.substring(fromIndex + 8, toIndex).trim();
+    }
+
+    /**
+     * Extracts the 'to' date string from the event string.
+     *
+     * @param str The event string.
+     * @return The 'to' date string.
+     */
+    private static String extractToDate(String str) {
+        int toIndex = str.indexOf(" to: ");
+        return str.substring(toIndex + 5, str.length() - 1).trim();
     }
 
 }
