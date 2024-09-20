@@ -21,16 +21,12 @@ public class DateTimeParser {
      * @return
      */
     public static LocalDateTime parse(String dateTimeStr) throws IllegalArgumentException {
-        if (dateTimeStr == null) {
-            throw new IllegalArgumentException("Input date-time string cannot be null");
-        }
         for (DateTimeFormatter formatter : FORMATTERS) {
             LocalDateTime result = parseWithFormatter(dateTimeStr, formatter);
             if (result != null) {
                 return result;
             }
         }
-
         throw new IllegalArgumentException("Date-time string is not in a recognized format: " + dateTimeStr);
     }
 

@@ -1,6 +1,7 @@
 package commands;
 
 import common.TaskList;
+import exceptions.FridayException;
 import storage.Storage;
 import tasks.Task;
 import ui.Ui;
@@ -29,6 +30,14 @@ public class ByeCommand extends Command {
         return true;
     }
 
+    /**
+     * Returns a bye message for the GUI.
+     *
+     * @param list    List which stores all Tasks in the chatbot.
+     * @param storage Stores previous and current Task objects.
+     * @return The response message to be displayed in the GUI.
+     * @throws FridayException If there are missing parameters or invalid input.
+     */
     @Override
     public String guiResponse(TaskList list, Storage storage) {
         return "Bye. Hope to see you again soon!";

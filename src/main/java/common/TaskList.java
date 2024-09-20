@@ -42,8 +42,8 @@ public class TaskList {
     public TaskList findTasks(String keyword) {
         TaskList filteredList = new TaskList();
         ArrayList<Task> filtered = new ArrayList<>(this.list.stream()
-                                       .filter(task -> task.getDescription()
-                                       .contains(keyword)).collect(Collectors.toCollection(ArrayList::new)));
+                .filter(task -> task.getDescription().toLowerCase().contains(keyword.toLowerCase()))
+                .collect(Collectors.toCollection(ArrayList::new)));
         filteredList.setList(filtered);
         return filteredList;
     }

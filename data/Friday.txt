@@ -1,2 +1,4 @@
-[T][ ][ ] Buy Chocolate for Pepper
-[E][ ][ ] Avengers Assemble (from: Sep 20 2024, 6:00 PM to: Sep 20 2024, 8:00 PM)
+[T][H][ ] Task 1
+[T][ ][ ] Task 2
+[T][ ][ ] Task 3
+[T][M][ ] Task 4

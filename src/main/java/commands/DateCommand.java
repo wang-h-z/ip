@@ -3,16 +3,15 @@ package commands;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import common.*;
-
-import exceptions.*;
-
+import common.DateTimeParser;
+import exceptions.FridayException;
+import exceptions.InputException;
 import storage.Storage;
-
-import ui.Friday;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import common.TaskList;
 import ui.Ui;
-
-import tasks.*;
 
 public class DateCommand extends Command {
 
@@ -23,44 +22,20 @@ public class DateCommand extends Command {
     }
 
     /**
-     * Retrieves the relevant dates given by the user if the format of the input date matches one of the accepted
-     * formats in the DateTimeParser. Finally, the Ui responds by outputting a message to the terminal.
+     * Extracts the date from the input, checks if the format is valid, and filters tasks based on the date.
      * <p>
-     * An InputException is thrown the date is empty. An IllegalArgumentException is thrown if the format is ambiguous.
+     * Throws InputException if the date format is invalid or missing.
      *
      * @param list List which stores all Tasks in the chatbot.
      * @param ui The interface which the user will be interacting with.
      * @param storage Stores previous and current Task objects.
-     * @throws FridayException
+     * @throws FridayException If an error occurs in parsing or processing the tasks.
      */
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) throws FridayException {
-        String date = this.input.substring("date".length()).trim();
-        if (date.isEmpty()) {
-            throw new InputException("Please give me a date. Try again.");
-        }
-        LocalDateTime userTime;
-        try {
-            userTime = DateTimeParser.parse(date);
-        } catch (IllegalArgumentException e) {
-            throw new InputException("I do not understand this format. Please try in this manner: d/M/yyyy HHmm");
-        }
-        TaskList dateList = new TaskList();
+        LocalDateTime userTime = parseDate();
+        TaskList dateList = getTasksBeforeDate(list, userTime);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
-        for (Task t : list.getList()) {
-            if (t instanceof Deadline) {
-                Deadline d = (Deadline) t;
-                if (d.getDate() != null && d.getDate().isBefore(userTime)) {
-                    dateList.add(d);
-                }
-            }
-            if (t instanceof Event) {
-                Event e = (Event) t;
-                if (e.getDate() != null && e.getDate().isBefore(userTime)) {
-                    dateList.add(e);
-                }
-            }
-        }
         ui.dateOutput(userTime.format(formatter), list);
     }
 
@@ -74,39 +49,67 @@ public class DateCommand extends Command {
         return false;
     }
 
+    /**
+     * Generates a response for the GUI interface by finding tasks due before a given date.
+     * Throws InputException if the date format is invalid or missing.
+     *
+     * @param list List which stores all Tasks in the chatbot.
+     * @param storage Stores previous and current Task objects.
+     * @return The formatted string response to be displayed in the GUI.
+     * @throws FridayException If an error occurs in parsing or processing the tasks.
+     */
     @Override
     public String guiResponse(TaskList list, Storage storage) throws FridayException {
-        String date = this.input.substring("date".length()).trim();
+        LocalDateTime userTime = parseDate();
+        TaskList dateList = getTasksBeforeDate(list, userTime);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
         Ui ui = new Ui();
+        return String.format("Here are the tasks that need to be done by this date: "
+                + userTime.format(formatter) + "\n" + ui.printList(dateList));
+    }
+
+    /**
+     * Parses the date string from the input and checks for validity. If the date string is invalid, an
+     * InputException is thrown.
+     *
+     * @return LocalDateTime object representing the parsed date.
+     * @throws InputException If the date string is missing or cannot be parsed.
+     */
+    private LocalDateTime parseDate() throws InputException {
+        String date = this.input.substring("date".length()).trim();
         if (date.isEmpty()) {
             throw new InputException("Please give me a date. Try again.");
         }
-        LocalDateTime userTime;
         try {
-            userTime = DateTimeParser.parse(date);
+            return DateTimeParser.parse(date);
         } catch (IllegalArgumentException e) {
-            throw new InputException("I do not understand this format. Please try in this manner: d/M/yyyy HHmm");
+            throw new InputException("I do not understand this format. Please try in this manner: dd/mm/yyyy HHmm");
         }
+    }
+
+    /**
+     * Filters tasks from the TaskList that have deadlines or events before the given date.
+     *
+     * @param list TaskList containing all tasks.
+     * @param userTime LocalDateTime object representing the date to filter by.
+     * @return A TaskList containing tasks due before the specified date.
+     */
+    private TaskList getTasksBeforeDate(TaskList list, LocalDateTime userTime) {
         TaskList dateList = new TaskList();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
         for (Task t : list.getList()) {
             if (t instanceof Deadline) {
                 Deadline d = (Deadline) t;
                 if (d.getDate() != null && d.getDate().isBefore(userTime)) {
-                    System.out.println(d.getDate());
                     dateList.add(d);
                 }
-            }
-            if (t instanceof Event) {
+            } else if (t instanceof Event) {
                 Event e = (Event) t;
                 if (e.getDate() != null && e.getDate().isBefore(userTime)) {
-                    System.out.println(e.getDate());
                     dateList.add(e);
                 }
             }
         }
-
-        return String.format("Here are the tasks in that needs to be done by this date: "
-                + date + "\n" + ui.printList(dateList));
+        return dateList;
     }
 }
+
