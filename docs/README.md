@@ -86,7 +86,7 @@ Adds a Deadline task to the list of tasks.
 
 Format: `deadline DESCRIPTIPON /by DEADLINE`
 
->> ❗ **Note:** `DEADLINE` can be replaced with a `FORMATTED_DATE` if used in this format: `dd/mm/yy HHmm`.
+>❗ **Note:** `DEADLINE` can be replaced with a `FORMATTED_DATE` if used in this format: `dd/mm/yy HHmm`.
 
 Examples:
 - `deadline Return Book /by Sunday`
@@ -104,8 +104,8 @@ Adds an Event task to the list of tasks.
 
 Format: `event DESCRIPTION /from DATE_1 to /to DATE_2`
 
->> ❗ **Note:** `DATE_1` and `DATE_2` can be replaced with a `FORMATTED_DATE` if used in this format: `dd/mm/yy HHmm`.
-> 
+> ❗ **Note:** `DATE_1` and `DATE_2` can be replaced with a `FORMATTED_DATE` if used in this format: `dd/mm/yy HHmm`.
+
 Examples: 
 - `event Build Lego /from Next Saturday /to Next Sunday`
 - `event Project Meeting /from 2024-09-19 14:00 /to 2024-09-19 16:00`
