@@ -1,7 +1,6 @@
 import commands.*;
 
 import exceptions.FridayException;
-import exceptions.InputException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,7 +38,7 @@ class ParserTest {
 
     @Test
     public void unknownCommandThrowsException() {
-        assertThrows(InputException.class, () -> parser.parse("invalid command", taskListStub, storageStub));
+        assertThrows(FridayException.class, () -> parser.parse("invalid command", taskListStub, storageStub));
     }
 
     @Test

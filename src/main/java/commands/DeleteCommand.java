@@ -1,7 +1,6 @@
 package commands;
 
 import exceptions.FridayException;
-import exceptions.InputException;
 import common.TaskList;
 
 import storage.Storage;
@@ -28,7 +27,7 @@ public class DeleteCommand extends Command {
     private Task deleteTask(TaskList list, Storage storage) throws FridayException {
         String i = input.substring("delete".length()).trim();
         if (i.isEmpty()) {
-            throw new InputException("Please give a valid task for me to delete. Try again.");
+            throw new FridayException("Please give a valid task for me to delete. Try again.");
         }
 
         int idx = Integer.parseInt(i) - 1;

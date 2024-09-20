@@ -3,7 +3,6 @@ package commands;
 import common.TaskList;
 
 import exceptions.FridayException;
-import exceptions.InputException;
 import storage.Storage;
 
 import ui.Ui;
@@ -26,7 +25,7 @@ public class MarkCommand extends Command {
     private String markTask(TaskList list, Storage storage) throws FridayException {
         String i = input.substring("mark".length()).trim();
         if (i.isEmpty()) {
-            throw new InputException("Please give a valid task for me to mark. Try again.");
+            throw new FridayException("Please give a valid task for me to mark. Try again.");
         }
         int idx = Integer.parseInt(i) - 1;
         if (list.isEmpty()) {

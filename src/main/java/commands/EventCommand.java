@@ -2,9 +2,7 @@ package commands;
 
 import exceptions.DescriptionException;
 import exceptions.FridayException;
-import exceptions.FromException;
 import exceptions.MissingCommandException;
-import exceptions.ToException;
 
 import common.TaskList;
 
@@ -27,7 +25,6 @@ public class EventCommand extends Command {
      * Separates the input into a description string, a from string, and a to string. If these strings are valid, an
      * event object is created. The Event object is then added to the TaskList. Storage saves the event object
      * into the local .txt file. The Ui outputs a message to the terminal to notify the user this has been done.
-     * <p>
      * Throws a MissingCommandException if either /from or /to commands are missing.
      * Throws IllegalArgumentException if /from comes after /to.
      *
@@ -72,8 +69,8 @@ public class EventCommand extends Command {
      * @return An Event object created from the input.
      * @throws MissingCommandException If either /from or /to is missing.
      * @throws DescriptionException If the description is empty.
-     * @throws FromException If the from date is empty.
-     * @throws ToException If the to date is empty.
+     * @throws FridayException If the from date is empty.
+     * @throws FridayException If the to date is empty.
      */
     private Task createEventFromInput() throws FridayException {
         validateInput();
@@ -129,12 +126,12 @@ public class EventCommand extends Command {
      * @param fromIndex The index of the /from command.
      * @param toIndex   The index of the /to command.
      * @return The from date string.
-     * @throws FromException if the from date is empty.
+     * @throws FridayException if the from date is empty.
      */
-    private String extractFromDate(int fromIndex, int toIndex) throws FromException {
+    private String extractFromDate(int fromIndex, int toIndex) throws FridayException {
         String from = this.input.substring(fromIndex + "/from".length(), toIndex).trim();
         if (from.isEmpty()) {
-            throw new FromException();
+            throw new FridayException("An event must have a starting date. Please try again using /from.");
         }
         return from;
     }
@@ -144,12 +141,12 @@ public class EventCommand extends Command {
      *
      * @param toIndex The index of the /to command.
      * @return The to date string.
-     * @throws ToException if the to date is empty.
+     * @throws FridayException if the to date is empty.
      */
-    private String extractToDate(int toIndex) throws ToException {
+    private String extractToDate(int toIndex) throws FridayException {
         String to = this.input.substring(toIndex + "/to".length()).trim();
         if (to.isEmpty()) {
-            throw new ToException();
+            throw new FridayException("An event must have a deadline. Please try again with /to");
         }
         return to;
     }

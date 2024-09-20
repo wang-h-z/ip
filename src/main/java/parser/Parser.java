@@ -3,7 +3,6 @@ package parser;
 import commands.*;
 
 import exceptions.FridayException;
-import exceptions.InputException;
 
 import common.TaskList;
 
@@ -29,7 +28,7 @@ public class Parser {
      * Returns a Command Object. The method recieved an input string and determines which CommandEnum this input belongs
      * to. If the command given in the input string is valid, a respective command object is created and returned.
      *<p>
-     * If the parser does not understand the input string, an InputException is thrown under the UNKOWN enum case.
+     * If the parser does not understand the input string, a FridayException is thrown under the UNKOWN enum case.
      *
      * @param input The user input string.
      * @param list The TaskList.
@@ -81,7 +80,7 @@ public class Parser {
 
             case UNKNOWN:
             default:
-                throw new InputException("Sorry, I do not understand this command.");
+                throw new FridayException("Sorry, I do not understand this command.");
         }
     }
 }

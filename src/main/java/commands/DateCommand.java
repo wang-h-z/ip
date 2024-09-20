@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 
 import common.DateTimeParser;
 import exceptions.FridayException;
-import exceptions.InputException;
 import storage.Storage;
 import tasks.Deadline;
 import tasks.Event;
@@ -24,7 +23,7 @@ public class DateCommand extends Command {
     /**
      * Extracts the date from the input, checks if the format is valid, and filters tasks based on the date.
      * <p>
-     * Throws InputException if the date format is invalid or missing.
+     * Throws FridayException if the date format is invalid or missing.
      *
      * @param list List which stores all Tasks in the chatbot.
      * @param ui The interface which the user will be interacting with.
@@ -51,7 +50,7 @@ public class DateCommand extends Command {
 
     /**
      * Generates a response for the GUI interface by finding tasks due before a given date.
-     * Throws InputException if the date format is invalid or missing.
+     * Throws FridayException if the date format is invalid or missing.
      *
      * @param list List which stores all Tasks in the chatbot.
      * @param storage Stores previous and current Task objects.
@@ -69,21 +68,21 @@ public class DateCommand extends Command {
     }
 
     /**
-     * Parses the date string from the input and checks for validity. If the date string is invalid, an
-     * InputException is thrown.
+     * Parses the date string from the input and checks for validity. If the date string is invalid, a
+     * FridayException is thrown.
      *
      * @return LocalDateTime object representing the parsed date.
-     * @throws InputException If the date string is missing or cannot be parsed.
+     * @throws FridayException If the date string is missing or cannot be parsed.
      */
-    private LocalDateTime parseDate() throws InputException {
+    private LocalDateTime parseDate() throws FridayException {
         String date = this.input.substring("date".length()).trim();
         if (date.isEmpty()) {
-            throw new InputException("Please give me a date. Try again.");
+            throw new FridayException("Please give me a date. Try again.");
         }
         try {
             return DateTimeParser.parse(date);
         } catch (IllegalArgumentException e) {
-            throw new InputException("I do not understand this format. Please try in this manner: dd/mm/yyyy HHmm");
+            throw new FridayException("I do not understand this format. Please try in this manner: dd/mm/yyyy HHmm");
         }
     }
 
