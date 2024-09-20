@@ -5,7 +5,10 @@ import java.util.stream.Collectors;
 
 import tasks.Task;
 
-
+/**
+ * Represents a list of tasks in the chatbot. The TaskList allows tasks to be added, removed, and searched.
+ * It provides various operations to manipulate and query tasks within the list.
+ */
 public class TaskList {
 
     private ArrayList<Task> list = new ArrayList<>();
@@ -73,7 +76,7 @@ public class TaskList {
      * @throws AssertionError If the index is less than 0.
      */
     public Task get(int i) {
-        assert i >= 0: "index should be greater than 0";
+        assert i >= 0 : "index should be greater than 0";
         return this.list.get(i);
     }
 

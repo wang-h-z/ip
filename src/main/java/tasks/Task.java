@@ -2,17 +2,28 @@ package tasks;
 
 import commands.PriorityCommand;
 
+/**
+ * Represents a generic task in the chatbot.
+ * A task has a description, a completion status, and an optional priority level.
+ * Specific types of tasks (Todo, Deadline, Event) extend this class.
+ */
 public class Task {
 
     protected String description;
     protected boolean isDone;
     protected PriorityCommand.Priorities priority;
 
+    /**
+     * Constructs a Task object with the given description.
+     * By default, the task is not done and has no priority.
+     *
+     * @param description The description of the task.
+     */
     public Task(String description) {
-            this.description = description;
-            assert !this.description.isEmpty() : "The description should not be empty.";
-            this.isDone = false;
-            this.priority = null;
+        this.description = description;
+        assert !this.description.isEmpty() : "The description should not be empty.";
+        this.isDone = false;
+        this.priority = null;
     }
 
     /**

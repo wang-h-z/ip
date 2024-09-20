@@ -2,6 +2,7 @@ package tasks;
 
 import commands.PriorityCommand;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -10,7 +11,8 @@ public class EventTest {
     @Test
     public void testToStringWithValidDates() {
         Event event = new Event("Project meeting", "Sep 19 2024, 2:00 pm", "Sep 19 2024, 4:00 pm");
-        assertEquals("[E][ ][ ] Project meeting (from: Sep 19 2024, 2:00 pm to: Sep 19 2024, 4:00 pm)", event.toString());
+        assertEquals("[E][ ][ ] Project meeting (from: Sep 19 2024, 2:00 pm to: Sep 19 2024, 4:00 pm)",
+                event.toString());
     }
 
     @Test
@@ -32,35 +34,41 @@ public class EventTest {
     public void testMarkAsDone() {
         Event event = new Event("Project meeting", "Sep 19 2024, 2:00 pm", "Sep 19 2024, 4:00 pm");
         event.markAsDone();
-        assertEquals("[E][ ][X] Project meeting (from: Sep 19 2024, 2:00 pm to: Sep 19 2024, 4:00 pm)", event.toString());
+        assertEquals("[E][ ][X] Project meeting (from: Sep 19 2024, 2:00 pm to: Sep 19 2024, 4:00 pm)",
+                event.toString());
     }
 
     @Test
     public void testEventWithoutPriority() {
         Event event = new Event("Casual meeting", "Nov 10 2024, 10:00 am", "Nov 10 2024, 12:00 pm");
-        assertEquals("[E][ ][ ] Casual meeting (from: Nov 10 2024, 10:00 am to: Nov 10 2024, 12:00 pm)", event.toString());
+        assertEquals("[E][ ][ ] Casual meeting (from: Nov 10 2024, 10:00 am to: Nov 10 2024, 12:00 pm)",
+                event.toString());
     }
 
     @Test
     public void testSetPriority() {
         Event event = new Event("Annual review", "Nov 15 2024, 9:00 am", "Nov 15 2024, 11:00 am");
         event.setPriority(PriorityCommand.Priorities.HIGH);
-        assertEquals("[E][H][ ] Annual review (from: Nov 15 2024, 9:00 am to: Nov 15 2024, 11:00 am)", event.toString());
+        assertEquals("[E][H][ ] Annual review (from: Nov 15 2024, 9:00 am to: Nov 15 2024, 11:00 am)",
+                event.toString());
     }
 
     @Test
     public void testEmptyDescriptionThrowsException() {
-        assertThrows(AssertionError.class, () -> new Event("", "Nov 15 2024, 9:00 am", "Nov 15 2024, 11:00 am"));
+        assertThrows(AssertionError.class, () -> new Event("", "Nov 15 2024, 9:00 am",
+                "Nov 15 2024, 11:00 am"));
     }
 
     @Test
     public void testEmptyFromDateThrowsException() {
-        assertThrows(AssertionError.class, () -> new Event("Annual review", "", "Nov 15 2024, 11:00 am"));
+        assertThrows(AssertionError.class, () -> new Event("Annual review",
+                "", "Nov 15 2024, 11:00 am"));
     }
 
     @Test
     public void testEmptyToDateThrowsException() {
-        assertThrows(AssertionError.class, () -> new Event("Annual review", "Nov 15 2024, 9:00 am", ""));
+        assertThrows(AssertionError.class, () -> new Event("Annual review",
+                "Nov 15 2024, 9:00 am", ""));
     }
 
     @Test

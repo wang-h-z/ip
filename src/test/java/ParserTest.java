@@ -1,17 +1,26 @@
-import commands.*;
-
-import exceptions.FridayException;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import commands.ByeCommand;
+import commands.Command;
+import commands.DateCommand;
+import commands.DeadlineCommand;
+import commands.DeleteCommand;
+import commands.EventCommand;
+import commands.FindCommand;
+import commands.ListCommand;
+import commands.MarkCommand;
+import commands.PriorityCommand;
+import commands.TodoCommand;
+import commands.UnmarkCommand;
+import common.TaskList;
+import exceptions.FridayException;
+import parser.Parser;
 import storage.Storage;
 
-import common.TaskList;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import parser.Parser;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ParserTest {
 

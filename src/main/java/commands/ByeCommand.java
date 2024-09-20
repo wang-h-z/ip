@@ -1,14 +1,14 @@
 package commands;
 
 import common.TaskList;
-
 import exceptions.FridayException;
-
 import storage.Storage;
-
-import ui.Friday;
 import ui.Ui;
 
+/**
+ * Represents a command to terminate the chatbot session.
+ * The ByeCommand is used when the user wants to exit the chatbot, displaying a goodbye message.
+ */
 public class ByeCommand extends Command {
 
     /**

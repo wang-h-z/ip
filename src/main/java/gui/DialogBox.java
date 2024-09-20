@@ -1,5 +1,8 @@
 package gui;
 
+import java.io.IOException;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,10 +14,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-
-
-import java.io.IOException;
-import java.util.Collections;
 
 /**
  * Represents a dialog box consisting of an ImageView to represent the speaker's face

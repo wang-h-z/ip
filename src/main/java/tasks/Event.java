@@ -3,28 +3,44 @@ package tasks;
 import java.time.LocalDateTime;
 
 import commands.PriorityCommand;
-
 import common.DateTimeParser;
 
+
+/**
+ * Represents an Event task in the chatbot. An Event has a description,
+ * a start date (/from), and an end date (/to). The Event task also supports
+ * priority levels and task completion status.
+ */
 public class Event extends Task {
     private String from;
     private String to;
     private LocalDateTime fromDate;
     private LocalDateTime toDate;
 
+    /**
+     * Constructs an Event with the given description, start date (/from), and end date (/to).
+     * The dates are parsed into LocalDateTime objects, and validation is done to ensure
+     * that the start date is not after the end date.
+     *
+     * @param description The description of the event.
+     * @param from The start date of the event as a string.
+     * @param to The end date of the event as a string.
+     * @throws IllegalArgumentException If the description is empty or if the /from date is after the /to date.
+     */
     public Event(String description, String from, String to) {
         super(description);
         assert !description.isEmpty() : "Your description should not be empty.";
         this.from = from;
-        assert !from.isEmpty(): "The /from String should not be empty.";
+        assert !from.isEmpty() : "The /from String should not be empty.";
         this.to = to;
-        assert !to.isEmpty(): "The /to String should not be empty.";
+        assert !to.isEmpty() : "The /to String should not be empty.";
         try {
             this.fromDate = DateTimeParser.parse(from);
         } catch (IllegalArgumentException e) {
             //No correct format, deadline only recorded as a String
             this.fromDate = null;
-        } try {
+        }
+        try {
             this.toDate = DateTimeParser.parse(to);
         } catch (IllegalArgumentException e) {
             //No correct format, deadline only recorded as a String

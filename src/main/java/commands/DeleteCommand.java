@@ -1,14 +1,16 @@
 package commands;
 
-import exceptions.FridayException;
 import common.TaskList;
-
+import exceptions.FridayException;
 import storage.Storage;
-
 import tasks.Task;
-
 import ui.Ui;
 
+/**
+ * Represents a command to delete a task from the task list in the chatbot.
+ * The DeleteCommand parses the user's input to determine the index of the task to delete,
+ * removes the task from the TaskList, and updates the storage.
+ */
 public class DeleteCommand extends Command {
     private final String input;
 
@@ -36,7 +38,8 @@ public class DeleteCommand extends Command {
             throw new FridayException("Attempting to delete task from an empty list. Please add tasks first.");
         }
         if (idx >= list.size() || idx < 0) {
-            throw new FridayException("Attempting to delete task which is not in the list. Please ensure the number is correct.");
+            throw new FridayException("Attempting to delete task which is not in the list. "
+                    + "Please ensure the number is correct.");
         }
 
         Task task = list.remove(idx);

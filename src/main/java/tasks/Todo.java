@@ -2,8 +2,17 @@ package tasks;
 
 import commands.PriorityCommand;
 
+/**
+ * Represents a Todo task in the chatbot.
+ * A Todo task consists of a description, a completion status, and an optional priority level.
+ */
 public class Todo extends Task {
 
+    /**
+     * Constructs a Todo task with the provided description.
+     *
+     * @param description The description of the Todo task.
+     */
     public Todo(String description) {
         super(description);
         assert !description.isEmpty() : "The description should not be empty.";

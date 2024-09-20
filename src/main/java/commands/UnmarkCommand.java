@@ -1,12 +1,15 @@
 package commands;
 
 import common.TaskList;
-
 import exceptions.FridayException;
 import storage.Storage;
-
 import ui.Ui;
 
+/**
+ * Represents a command to unmark a task as not done in the chatbot.
+ * The UnmarkCommand parses the user's input to determine the index of the task to unmark,
+ * updates the task's status in the TaskList, and saves the updated list to Storage.
+ */
 public class UnmarkCommand extends Command {
 
     private final String input;
@@ -33,7 +36,8 @@ public class UnmarkCommand extends Command {
             throw new FridayException("There are no tasks currently. Please add tasks first.");
         }
         if (idx >= list.size() || idx < 0) {
-            throw new FridayException("Attempting to mark task which is not in the list. Please ensure the number is correct.");
+            throw new FridayException("Attempting to mark task which is not in the list. "
+                    + "Please ensure the number is correct.");
         }
         list.get(idx).markAsUndone();
         storage.saveTasks(list);

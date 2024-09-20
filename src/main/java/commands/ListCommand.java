@@ -1,11 +1,13 @@
 package commands;
 
 import common.TaskList;
-
 import storage.Storage;
-
 import ui.Ui;
 
+/**
+ * Represents a command to list all tasks in the chatbot.
+ * The ListCommand displays the current tasks stored in the TaskList using both the CLI and GUI.
+ */
 public class ListCommand extends Command {
 
     /**

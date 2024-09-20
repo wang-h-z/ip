@@ -1,12 +1,15 @@
 package commands;
 
 import common.TaskList;
-
 import exceptions.FridayException;
 import storage.Storage;
-
 import ui.Ui;
 
+/**
+ * Represents a command to find tasks in the TaskList that match a given keyword.
+ * The FindCommand allows the user to search for tasks containing a specific keyword,
+ * displaying the results in both the CLI and GUI.
+ */
 public class FindCommand extends Command {
 
     private final String input;

@@ -8,15 +8,19 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import common.TaskList;
-
 import tasks.Task;
 
+/**
+ * The Storage class handles loading and saving tasks to and from a specified .txt file.
+ * Tasks are stored persistently by writing them to a file, and tasks are loaded into a TaskList
+ * when the chatbot is initialized.
+ */
 public class Storage {
 
-    private final String FILE_PATH;
+    private final String filePath;
 
     public Storage(String filepath) {
-        this.FILE_PATH = filepath;
+        this.filePath = filepath;
     }
 
     /**
@@ -28,13 +32,14 @@ public class Storage {
      * @param list The TaskList object which stores all Tasks in the chatbot.
      */
     public void loadTasks(TaskList list) {
-        File file = new File(FILE_PATH);
+        File file = new File(filePath);
         if (!file.exists()) {
             try {
                 file.getParentFile().mkdirs();
                 file.createNewFile();
             } catch (IOException e) {
-                System.out.println("Something went wrong trying to create the non-existing ui.Friday.txt file: " + e.getMessage());
+                System.out.println("Something went wrong trying to create the non-existing ui.Friday.txt file: "
+                        + e.getMessage());
             }
         } else {
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -44,7 +49,8 @@ public class Storage {
                     list.add(task);
                 }
             } catch (IOException e) {
-                System.out.println("Something went wrong trying to load tasks from an existing ui.Friday.txt file: " + e.getMessage());
+                System.out.println("Something went wrong trying to load tasks from an existing ui.Friday.txt file: "
+                        + e.getMessage());
             }
         }
     }
@@ -56,7 +62,7 @@ public class Storage {
      * @param list The TaskList object which stores all Tasks in the chatbot.
      */
     public void saveTasks(TaskList list) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
             for (Task task : list.getList()) {
                 writer.println(task.toString());
             }

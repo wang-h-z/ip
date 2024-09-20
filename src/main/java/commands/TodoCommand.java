@@ -1,16 +1,17 @@
 package commands;
 
-import exceptions.DescriptionException;
-
 import common.TaskList;
-
+import exceptions.DescriptionException;
 import storage.Storage;
-
 import tasks.Task;
 import tasks.Todo;
-
 import ui.Ui;
 
+/**
+ * Represents a command to create a new Todo task in the chatbot.
+ * The TodoCommand validates the user input, creates a new Todo task,
+ * adds it to the TaskList, and saves it in Storage.
+ */
 public class TodoCommand extends Command {
     private final String input;
 
@@ -75,7 +76,7 @@ public class TodoCommand extends Command {
     @Override
     public String guiResponse(TaskList list, Storage storage) throws DescriptionException {
         Task task = createTodoTask(list, storage);
-        return String.format(""" 
+        return String.format("""
                         Got it. I've added this task:
                           %s
                         Now you have %d tasks in the list.""", task, list.size());

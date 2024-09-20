@@ -1,18 +1,19 @@
 package commands;
 
+import common.TaskList;
 import exceptions.DescriptionException;
 import exceptions.FridayException;
 import exceptions.MissingCommandException;
-
-import common.TaskList;
-
 import storage.Storage;
-
 import tasks.Event;
 import tasks.Task;
-
 import ui.Ui;
 
+/**
+ * Represents a command to create an Event task in the chatbot.
+ * The EventCommand parses user input, creates an Event object with a description, start (/from), and end (/to) dates,
+ * adds it to the TaskList, and saves it in Storage.
+ */
 public class EventCommand extends Command {
 
     private final String input;

@@ -4,14 +4,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import common.DateTimeParser;
+import common.TaskList;
 import exceptions.FridayException;
 import storage.Storage;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
-import common.TaskList;
 import ui.Ui;
 
+/**
+ * Represents a command to filter tasks that are due before a specified date.
+ * The DateCommand parses a date from user input and returns tasks with deadlines or events that occur before that date.
+ */
 public class DateCommand extends Command {
 
     private final String input;

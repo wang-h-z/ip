@@ -1,12 +1,15 @@
 package commands;
 
 import common.TaskList;
-
 import exceptions.FridayException;
 import storage.Storage;
-
 import ui.Ui;
 
+/**
+ * Represents a command to mark a task as done in the chatbot.
+ * The MarkCommand parses the user's input to determine the index of the task to mark as done,
+ * updates the task's status in the TaskList, and saves the updated list to storage.
+ */
 public class MarkCommand extends Command {
 
     private final String input;
@@ -33,7 +36,8 @@ public class MarkCommand extends Command {
             throw new FridayException("There are no tasks currently. Please add tasks first.");
         }
         if (idx >= list.size() || idx < 0) {
-            throw new FridayException("Attempting to mark task which is not in the list. Please ensure the number is correct.");
+            throw new FridayException("Attempting to mark task which is not in the list."
+                    + " Please ensure the number is correct.");
         }
         list.get(idx).markAsDone();
         storage.saveTasks(list);
