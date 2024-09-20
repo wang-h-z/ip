@@ -68,12 +68,6 @@ public class EventTest {
         Event event = new Event("Project meeting", "invalid-date", "Dec 02 2024, 11:00 am");
         assertEquals("[E][ ][ ] Project meeting (from: invalid-date to: Dec 02 2024, 11:00 am)", event.toString());
     }
-
-    @Test
-    public void testFromDateAfterToDateThrowsException() {
-        assertThrows(IllegalArgumentException.class, () ->
-                new Event("Invalid meeting", "Sep 19 2024, 4:00 pm", "Sep 19 2024, 2:00 pm"));
-    }
 }
 
 

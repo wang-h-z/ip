@@ -26,20 +26,6 @@ jobs:
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1
 
-      # Add the cache-clearing step before setting up Gradle and running the build
-      - name: Clear Gradle Cache (Linux & MacOS)
-        if: runner.os != 'Windows'
-        run: |
-          rm -rf ~/.gradle/caches/
-
-      - name: Clear Gradle Cache (Windows)
-        if: runner.os == 'Windows'
-        shell: cmd
-        run: |
-          IF EXIST "%USERPROFILE%\.gradle\caches" (
-            rmdir /s /q "%USERPROFILE%\.gradle\caches"
-          )
-          
       - name: Setup JDK 17
         uses: actions/setup-java@v1
         with:
