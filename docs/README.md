@@ -2,7 +2,7 @@
 
 ![UI Image](./Ui.png)
 
-Friday is a desktop app for **managing your tasks, optimzed for use via a Command Line Interace (CLI)** while still 
+Friday is a desktop app for **managing your tasks, optimized for use via a Command Line Interface (CLI)** while still 
 having the benefits of a GUI. If you can type fast, Friday can help you manage your deadlines faster than ever.
 
 - Quickstart
@@ -43,8 +43,8 @@ Some example commands you can try:
 
 ## Features
 
-> [!NOTE]
-> - Words in `UPPER_CASE` are the paramenters to be supplied by the user. 
+> ❗ **Note:**
+> - Words in `UPPER_CASE` are the parameters to be supplied by the user. 
 > 
 >   e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo Buy Milk`.
 > - Parameters must be filled.
@@ -52,18 +52,17 @@ Some example commands you can try:
 >   e.g. If a command specifies `todo DESCRIPTON`, then the user must give an input to `DESCRIPTION`.
 > - Parameters labelled as `ID` must be within the list's index (1-base indexing)
 > - Parameters labelled as `FORMATTED_DATE` must follow a certain DateTime format to be compared chronologically. 
-> See supported formats for more details.
+> See relevant features for more details.
 > - Parameters **must** be in a specific order.
 > 
->   e.g if the command specifies `event DESCRIPTION /from DATE_1 /to DATE_2`, then 
+>   e.g. if the command specifies `event DESCRIPTION /from DATE_1 /to DATE_2`, then 
 > `event DESCRIPTION /to DATE_2 /from DATE_1` is not valid.
 > - Extraneous parameters for commands that do not take in parameters such as (`list` and `bye`) will be ignored.
 > 
 >   e.g. if the command given is `list 123`, it will be interpreted as `list`.
 > 
 
-### Adding tasks: 
-<br>
+## Adding tasks:
 
 ### Adding a Todo Task: `todo`
 
@@ -87,7 +86,9 @@ Adds a Deadline task to the list of tasks.
 
 Format: `deadline DESCRIPTIPON /by DEADLINE`
 
-Examples: 
+>> ❗ **Note:** `DEADLINE` can be replaced with a `FORMATTED_DATE` if used in this format: `dd/mm/yy HHmm`.
+
+Examples:
 - `deadline Return Book /by Sunday`
 
 Expected Output: 
@@ -103,6 +104,8 @@ Adds an Event task to the list of tasks.
 
 Format: `event DESCRIPTION /from DATE_1 to /to DATE_2`
 
+>> ❗ **Note:** `DATE_1` and `DATE_2` can be replaced with a `FORMATTED_DATE` if used in this format: `dd/mm/yy HHmm`.
+> 
 Examples: 
 - `event Build Lego /from Next Saturday /to Next Sunday`
 - `event Project Meeting /from 2024-09-19 14:00 /to 2024-09-19 16:00`
@@ -233,8 +236,9 @@ Bye. Hope to see you again soon!
 <br> 
 
 ### Saving the data
-Friday data are saved in the hard disck atuomatically after any command that changes the data. There 
-is no need to save manually. 
+Friday's data are saved in the hard disk automatically after any command that changes the data. There 
+is no need to save manually.
+
 <br>
 
 ### Clear the data: `clear`
@@ -243,9 +247,8 @@ _Details coming soon ..._
 ---
 
 ## FAQ
-**Q**: How do I transfer my data to another Computer? 
+**Q**: How do I transfer my data to another Computer? \
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file
 that contains the data of your previous Friday folder.
-
 ---
 

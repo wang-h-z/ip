@@ -1,4 +1,0 @@
-[T][H][ ] Task 1
-[T][ ][ ] Task 2
-[T][ ][ ] Task 3
-[T][M][ ] Task 4
