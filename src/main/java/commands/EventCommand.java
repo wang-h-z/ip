@@ -34,6 +34,7 @@ public class EventCommand extends Command {
      */
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) throws FridayException {
+        validateInput();
         Task event = createEventFromInput();
         list.add(event);
         storage.saveTasks(list);
@@ -62,6 +63,7 @@ public class EventCommand extends Command {
      */
     @Override
     public String guiResponse(TaskList list, Storage storage) throws FridayException {
+        validateInput();
         Event event = createEventFromInput();
         list.add(event);
         storage.saveTasks(list);
@@ -82,8 +84,6 @@ public class EventCommand extends Command {
      * @throws FridayException If the from or to date is empty, or if /from comes after /to.
      */
     private Event createEventFromInput() throws FridayException {
-        validateInput();
-
         int fromIndex = this.input.indexOf("/from");
         int toIndex = this.input.indexOf("/to");
 
