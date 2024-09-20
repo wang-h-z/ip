@@ -1,15 +1,27 @@
 package parser;
 
-import commands.*;
-
-import exceptions.FridayException;
-
+import commands.ByeCommand;
+import commands.Command;
+import commands.DateCommand;
+import commands.DeadlineCommand;
+import commands.DeleteCommand;
+import commands.EventCommand;
+import commands.FindCommand;
+import commands.ListCommand;
+import commands.MarkCommand;
+import commands.PriorityCommand;
+import commands.TodoCommand;
+import commands.UnmarkCommand;
 import common.TaskList;
-
+import exceptions.FridayException;
 import storage.Storage;
-
 import tasks.Task;
 
+/**
+ * The Parser class is responsible for interpreting user input and generating the appropriate command objects.
+ * It uses an internal enum {@link CommandEnum} to categorize and identify different commands supported by the chatbot.
+ * If the input does not match any known command, the parser will throw a {@link FridayException}.
+ */
 public class Parser {
 
     /**
@@ -40,7 +52,7 @@ public class Parser {
      * @return The corresponding Command object to be executed by the chatbot.
      * @throws FridayException If the input string contains an unrecognized command.
      */
-    public Command parse(String input, TaskList list, Storage storage)  throws FridayException {
+    public Command parse(String input, TaskList list, Storage storage) throws FridayException {
 
         String[] parts = input.trim().split(" ", 2);
         CommandEnum command = CommandEnum.fromString(parts[0]);
@@ -49,42 +61,42 @@ public class Parser {
 
         switch (command) {
 
-            case BYE:
-                return new ByeCommand();
+        case BYE:
+            return new ByeCommand();
 
-            case LIST:
-                return new ListCommand();
+        case LIST:
+            return new ListCommand();
 
-            case MARK:
-                return new MarkCommand(input);
+        case MARK:
+            return new MarkCommand(input);
 
-            case UNMARK:
-                return new UnmarkCommand(input);
+        case UNMARK:
+            return new UnmarkCommand(input);
 
-            case TODO:
-                return new TodoCommand(input);
+        case TODO:
+            return new TodoCommand(input);
 
-            case DEADLINE:
-                return new DeadlineCommand(input);
+        case DEADLINE:
+            return new DeadlineCommand(input);
 
-            case EVENT:
-                return new EventCommand(input);
+        case EVENT:
+            return new EventCommand(input);
 
-            case DELETE:
-                return new DeleteCommand(input);
+        case DELETE:
+            return new DeleteCommand(input);
 
-            case DATE:
-                return new DateCommand(input);
+        case DATE:
+            return new DateCommand(input);
 
-            case FIND:
-                return new FindCommand(input);
+        case FIND:
+            return new FindCommand(input);
 
-            case PRIORITY:
-                return new PriorityCommand(input);
+        case PRIORITY:
+            return new PriorityCommand(input);
 
-            case UNKNOWN:
-            default:
-                throw new FridayException("Sorry, I do not understand this command.");
+        case UNKNOWN:
+        default:
+            throw new FridayException("Sorry, I do not understand this command.");
         }
     }
 }

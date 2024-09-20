@@ -1,16 +1,17 @@
 package ui;
 
 import commands.Command;
-
 import common.BotMessage;
 import common.TaskList;
-
 import exceptions.FridayException;
-
 import parser.Parser;
-
 import storage.Storage;
 
+/**
+ * The Friday class represents the main entry point for the chatbot application.
+ * It handles interactions between the user, the task list, and the storage system,
+ * and processes commands from both the terminal and the GUI.
+ */
 public class Friday {
     private final BotMessage header = new BotMessage("""
              \t  Hello! I'm ui.ui.Friday
@@ -24,6 +25,12 @@ public class Friday {
     private Storage storage;
     private Ui ui;
 
+    /**
+     * Constructs the Friday chatbot, initializing the user interface, parser, task list, and storage.
+     * The chatbot reads from and writes to a storage file specified by the file path.
+     *
+     * @param filepath The path to the storage file where tasks will be loaded and saved.
+     */
     public Friday(String filepath) {
         this.ui = new Ui();
         this.parser = new Parser();
@@ -81,7 +88,7 @@ public class Friday {
      *
      * @param args Command-line arguments (not used).
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Friday bot = new Friday("data/Friday.txt");
         bot.start();
     }

@@ -4,12 +4,15 @@ import java.util.Scanner;
 
 import common.BotMessage;
 import common.TaskList;
-
 import tasks.Task;
 
+/**
+ * The Ui class handles all user interactions in the chatbot.
+ * It manages displaying messages, lists, and tasks in the terminal, and it reads user input.
+ */
 public class Ui {
 
-    Scanner scanner;
+    private Scanner scanner;
 
     private final String header = """
              \t  Hello! I'm Friday
@@ -97,7 +100,7 @@ public class Ui {
      * @param list The TaskList object which stores all Tasks in the chatbot.
      */
     public void addTaskToListOutput(Task task, TaskList list) {
-        BotMessage output = new BotMessage(String.format(""" 
+        BotMessage output = new BotMessage(String.format("""
                         \t Got it. I've added this task:
                         \t  %s
                         \t Now you have %d tasks in the list.""", task, list.size()));
@@ -111,7 +114,7 @@ public class Ui {
      * @param list The TaskList object which stores all Tasks in the chatbot.
      */
     public void deleteOutput(Task task, TaskList list) {
-        BotMessage output = new BotMessage(String.format(""" 
+        BotMessage output = new BotMessage(String.format("""
                         \t Got it. I've removed this task:
                         \t  %s
                         \t Now you have %d tasks in the list.""", task, list.size()));
@@ -125,7 +128,8 @@ public class Ui {
      * @param list The TaskList object which stores all Tasks in the chatbot.
      */
     public void dateOutput(String date, TaskList list) {
-        BotMessage output = new BotMessage("\t Here are the tasks in that needs to be done by this date: " + date + "\n" + printList(list));
+        BotMessage output = new BotMessage("\t Here are the tasks in that needs to be done by this date: "
+                + date + "\n" + printList(list));
         System.out.println(output);
     }
 
@@ -135,7 +139,8 @@ public class Ui {
      * @param list The TaskList object which stores all Tasks in the chatbot.
      */
     public void findOutput(TaskList list) {
-        BotMessage output = new BotMessage("\t Here are the matching tasks in your list:" + "\n" + this.printList(list));
+        BotMessage output = new BotMessage("\t Here are the matching tasks in your list:"
+                + "\n" + this.printList(list));
         System.out.println(output);
     }
 

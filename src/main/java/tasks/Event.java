@@ -30,6 +30,12 @@ public class Event extends Task {
             //No correct format, deadline only recorded as a String
             this.toDate = null;
         }
+
+        if (this.fromDate != null && this.toDate != null) {
+            if (this.fromDate.isAfter(this.toDate)) {
+                throw new IllegalArgumentException("The /from date cannot be after the /to date.");
+            }
+        }
     }
 
     /**

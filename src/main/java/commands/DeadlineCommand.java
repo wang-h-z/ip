@@ -1,19 +1,20 @@
 package commands;
 
-import exceptions.MissingCommandException;
+import common.TaskList;
+import exceptions.DeadlineException;
 import exceptions.DescriptionException;
 import exceptions.FridayException;
-import exceptions.DeadlineException;
-
-import common.TaskList;
-
+import exceptions.MissingCommandException;
 import storage.Storage;
-
-import tasks.Task;
 import tasks.Deadline;
-
+import tasks.Task;
 import ui.Ui;
 
+/**
+ * Represents a command to create a Deadline task in the chatbot.
+ * The DeadlineCommand parses user input, creates a Deadline task, adds it to the TaskList,
+ * and saves it in Storage. It also handles interaction with the user through the Ui object or GUI.
+ */
 public class DeadlineCommand extends Command {
 
     private final String input;
@@ -57,7 +58,7 @@ public class DeadlineCommand extends Command {
         Task task = createDeadlineTask();
         list.add(task);
         storage.saveTasks(list);
-        return String.format(""" 
+        return String.format("""
                         Got it. I've added this task:
                           %s
                         Now you have %d tasks in the list.""", task, list.size());

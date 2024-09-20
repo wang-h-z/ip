@@ -1,16 +1,22 @@
 package commands;
 
 import common.TaskList;
-
 import exceptions.FridayException;
 import exceptions.MissingCommandException;
-
 import storage.Storage;
-
 import ui.Ui;
 
+/**
+ * Represents a command that sets the priority of a specific task in the TaskList.
+ * The PriorityCommand parses the user's input to determine which task to prioritize and
+ * sets the priority to one of the predefined levels: HIGH, MEDIUM, or LOW.
+ */
 public class PriorityCommand extends Command {
 
+    /**
+     * Enum representing the three priority levels: HIGH, MEDIUM, and LOW.
+     * Each level returns its corresponding abbreviation (H, M, L) when converted to a string.
+     */
     public enum Priorities {
         HIGH {
             @Override
@@ -155,14 +161,14 @@ public class PriorityCommand extends Command {
      */
     public static Priorities priorityString(String input) {
         switch (input) {
-            case "H":
-                return Priorities.HIGH;
-            case "M":
-                return Priorities.MEDIUM;
-            case "L":
-                return Priorities.LOW;
-            default:
-                return null;
+        case "H":
+            return Priorities.HIGH;
+        case "M":
+            return Priorities.MEDIUM;
+        case "L":
+            return Priorities.LOW;
+        default:
+            return null;
         }
     }
 }

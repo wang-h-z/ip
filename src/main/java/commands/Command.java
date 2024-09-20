@@ -1,16 +1,15 @@
 package commands;
 
-import exceptions.FridayException;
-
 import common.TaskList;
-
+import exceptions.FridayException;
 import storage.Storage;
-
-import tasks.Task;
-
-import ui.Friday;
 import ui.Ui;
 
+/**
+ * Represents an abstract command that the chatbot can execute.
+ * Subclasses of Command are expected to provide specific implementations for task execution.
+ * Each command interacts with the TaskList, Ui, and Storage objects to manipulate and persist tasks.
+ */
 public abstract class Command {
 
     /**
