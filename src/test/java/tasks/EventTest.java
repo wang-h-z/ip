@@ -72,8 +72,7 @@ public class EventTest {
     @Test
     public void testFromDateAfterToDateThrowsException() {
         assertThrows(IllegalArgumentException.class, () ->
-                new Event("Invalid meeting", "Sep 19 2024, 4:00 pm", "Sep 19 2024, 2:00 pm")
-        );
+                new Event("Invalid meeting", "Sep 19 2024, 4:00 pm", "Sep 19 2024, 2:00 pm"));
     }
 }
 
