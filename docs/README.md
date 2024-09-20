@@ -27,15 +27,15 @@ having the benefits of a GUI. If you can type fast, Friday can help you manage y
 ## Quick Start
 
 1. Ensure you have Java `17` installed in your Computer.
-2. Download the latest `.jar` file from here.
+2. Download the latest `.jar` file from [here](https://github.com/wang-h-z/ip).
 3. Copy the file to the folder you want to use as the _home folder_ for Friday.
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar friday.jar` command to run
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Friday.jar` command to run
 the application.\
 A GUI similar to the above should appear in a few seconds. Note that the app does not begin with sample data.
 5. Type the command in the command box and press Enter to execute it. \
 Some example commands you can try:
 - `list`: Lists all tasks.
-- `todo Homework Assignment`: Adds a Todo task with the description Homework Assignment
+- `todo Homework Assignment`: Adds a Todo task with the description `Homework Assignment`
 - `bye`: Exits the app.
 6. Refer to the Features below for details of each command. 
 
@@ -119,7 +119,7 @@ Now you have 3 tasks in the list.
 OR
 
 Got it. I've added this task: 
-  [E][ ][ ] Project meeting (from: Sep 19 2024, 2:00 PM to: Sep 19 2024, 4:00 PM)
+  [E][ ][ ] Project meeting (from: Sep 19 2024, 2:00 pm to: Sep 19 2024, 4:00 pm)
 Now you have 3 tasks in the list.
 ```
 <br>
@@ -205,7 +205,7 @@ Examples:
 Expected Output
 ```dtd
 Here are the tasks that need to be done by this date: FORMATTED DATE
-    1. [E][ ][ ] Project meeting (from: Sep 19 2024, 2:00 PM to: Sep 19 2024, 4:00 PM)
+    1. [E][ ][ ] Project meeting (from: Sep 19 2024, 2:00 pm to: Sep 19 2024, 4:00 pm)
 ```
 <br>
 
