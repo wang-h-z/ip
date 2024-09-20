@@ -1,3 +1,5 @@
+package parser;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -18,7 +20,6 @@ import commands.TodoCommand;
 import commands.UnmarkCommand;
 import common.TaskList;
 import exceptions.FridayException;
-import parser.Parser;
 import storage.Storage;
 
 class ParserTest {
