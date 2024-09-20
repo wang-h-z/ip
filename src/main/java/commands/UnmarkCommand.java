@@ -18,9 +18,10 @@ public class UnmarkCommand extends Command {
     /**
      * Unmarks the task at the specified index in the TaskList and saves the updated list to storage.
      *
-     * @param list List which stores all Tasks in the chatbot.
-     * @param storage Stores previous and current Task objects.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param storage The Storage object that manages saving and loading tasks.
      * @return The message confirming the task is unmarked as done.
+     * @throws FridayException If the input is invalid, or if the task index is out of bounds.
      */
     private String unmarkTask(TaskList list, Storage storage) throws FridayException {
         String i = input.substring("unmark".length()).trim();
@@ -40,11 +41,12 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * Executes the UnmarkCommand by unmarking the task and showing output in the terminal.
+     * Executes the UnmarkCommand by unmarking the specified task and displaying the result in the CLI.
      *
-     * @param list List which stores all Tasks in the chatbot.
-     * @param ui The interface which the user will be interacting with.
-     * @param storage Stores previous and current Task objects.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param ui The Ui object that handles interactions with the user.
+     * @param storage The Storage object that manages saving and loading tasks.
+     * @throws FridayException If the input is invalid or if there are issues with the task processing.
      */
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) throws FridayException {
@@ -63,11 +65,12 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * Executes the UnmarkCommand and returns the response for the GUI.
+     * Executes the UnmarkCommand and returns the response message for the GUI.
      *
-     * @param list List which stores all Tasks in the chatbot.
-     * @param storage Stores previous and current Task objects.
-     * @return The GUI response message.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param storage The Storage object that manages saving and loading tasks.
+     * @return The GUI response message confirming the task has been unmarked as done.
+     * @throws FridayException If the input is invalid or if there are issues with the task processing.
      */
     @Override
     public String guiResponse(TaskList list, Storage storage) throws FridayException {

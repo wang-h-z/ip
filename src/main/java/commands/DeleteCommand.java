@@ -17,12 +17,13 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Handles the common logic of deleting a task from the list based on the index provided in the input.
+     * Deletes a task from the task list based on the index provided in the user input.
+     * Updates the storage after the task is deleted.
      *
-     * @param list List which stores all Tasks in the chatbot.
-     * @param storage Stores previous and current Task objects.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param storage Storage object that manages saving and loading tasks.
      * @return The Task object that was deleted.
-     * @throws FridayException When the index is invalid or the list is empty.
+     * @throws FridayException If the input index is invalid, or if the task list is empty.
      */
     private Task deleteTask(TaskList list, Storage storage) throws FridayException {
         String i = input.substring("delete".length()).trim();
@@ -46,10 +47,10 @@ public class DeleteCommand extends Command {
     /**
      * Executes the DeleteCommand by deleting the task and showing output in the terminal.
      *
-     * @param list List which stores all Tasks in the chatbot.
-     * @param ui The interface which the user will be interacting with.
-     * @param storage Stores previous and current Task objects.
-     * @throws FridayException
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param ui The Ui object that handles interactions with the user.
+     * @param storage The Storage object that manages saving and loading tasks.
+     * @throws FridayException If an error occurs while deleting the task (e.g., invalid index).
      */
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) throws FridayException {
@@ -70,10 +71,10 @@ public class DeleteCommand extends Command {
     /**
      * Executes the DeleteCommand and returns the response for the GUI.
      *
-     * @param list List which stores all Tasks in the chatbot.
-     * @param storage Stores previous and current Task objects.
-     * @return The GUI response message.
-     * @throws FridayException
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param storage The Storage object that manages saving and loading tasks.
+     * @return The response message for the GUI after the task is deleted.
+     * @throws FridayException If an error occurs while deleting the task (e.g., invalid index).
      */
     @Override
     public String guiResponse(TaskList list, Storage storage) throws FridayException {

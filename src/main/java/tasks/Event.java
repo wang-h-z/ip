@@ -32,9 +32,15 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns the end date of the event as a LocalDateTime object.
+     *
+     * @return The end date, or null if it is stored as a string.
+     */
     public LocalDateTime getDate() {
         return this.toDate;
     }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + DateTimeParser.format(fromDate, from) + " to: "
@@ -42,10 +48,11 @@ public class Event extends Task {
     }
 
     /**
-     * Returns an Event given a String that represents the Event task.
+     * Creates an Event object from a string representation of an Event task.
+     * Parses the task's completion status, priority level, description, start date, and end date.
      *
-     * @param str The String that represents the Event Task.
-     * @return
+     * @param str The string representing the Event task.
+     * @return The created Event object.
      */
     public static Event fromString(String str) {
         boolean isDone = str.contains("[X]");

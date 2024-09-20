@@ -12,6 +12,10 @@ import tasks.Task;
 
 public class Parser {
 
+    /**
+     * Enum representing all possible commands recognized by the chatbot.
+     * Provides a method to convert a string input into an enum constant, defaulting to UNKNOWN for unrecognized inputs.
+     */
     private enum CommandEnum {
         BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, DATE, FIND, PRIORITY, UNKNOWN;
 
@@ -25,16 +29,16 @@ public class Parser {
     }
 
     /**
-     * Returns a Command Object. The method recieved an input string and determines which CommandEnum this input belongs
-     * to. If the command given in the input string is valid, a respective command object is created and returned.
-     *<p>
-     * If the parser does not understand the input string, a FridayException is thrown under the UNKOWN enum case.
+     * Parses the user input and returns a Command object based on the identified command type.
+     * The input string is analyzed to determine which CommandEnum it corresponds to, and the appropriate
+     * command object is created. If the input string is not recognized as a valid command,
+     * a FridayException is thrown.
      *
      * @param input The user input string.
-     * @param list The TaskList.
-     * @param storage Saves the tasks in a .txt file.
-     * @return Command object to be executed in the chatbot.
-     * @throws FridayException
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param storage The Storage object that manages saving and loading tasks.
+     * @return The corresponding Command object to be executed by the chatbot.
+     * @throws FridayException If the input string contains an unrecognized command.
      */
     public Command parse(String input, TaskList list, Storage storage)  throws FridayException {
 

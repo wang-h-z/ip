@@ -1,19 +1,22 @@
 package commands;
 
 import common.TaskList;
+
 import exceptions.FridayException;
+
 import storage.Storage;
-import tasks.Task;
+
+import ui.Friday;
 import ui.Ui;
 
 public class ByeCommand extends Command {
 
     /**
-     * The user interface will show an ending message when this method is called.
+     * Friday CLI will show an ending message when this method is called.
      *
-     * @param list List which stores all Tasks in the chatbot.
-     * @param ui The interface which the user will be interacting with.
-     * @param storage Stores previous and current Task objects.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param ui The Ui object that handles interactions with the user.
+     * @param storage The Storage object that manages saving and loading tasks.
      */
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) {
@@ -31,15 +34,15 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Returns a bye message for the GUI.
+     * Friday GUI will show an ending message when this method is called.
      *
-     * @param list    List which stores all Tasks in the chatbot.
-     * @param storage Stores previous and current Task objects.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param storage The Storage object that manages saving and loading tasks.
      * @return The response message to be displayed in the GUI.
      * @throws FridayException If there are missing parameters or invalid input.
      */
     @Override
-    public String guiResponse(TaskList list, Storage storage) {
+    public String guiResponse(TaskList list, Storage storage) throws FridayException {
         return "Bye. Hope to see you again soon!";
     }
 

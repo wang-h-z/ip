@@ -20,13 +20,12 @@ public class Storage {
     }
 
     /**
-     * Checks if the .txt file contains task strings exits. If the file does not exist, the relevant parent directory
-     * the .txt file itself is created. If the file exists, each line of the file is read using a BufferedReader object.
-     * Each line is then added into the TaskList.
-     * <p>
-     * Throws IOExceptions if creating the .txt file or if loading tasks fail.
+     * Loads tasks from the specified .txt file into the TaskList.
+     * If the file or its parent directory does not exist, they are created.
+     * Each line in the file represents a task and is added to the TaskList. If the file is missing or there are
+     * issues reading it, the necessary file or directory is created.
      *
-     * @param list A TaskList containing all tasks.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
      */
     public void loadTasks(TaskList list) {
         File file = new File(FILE_PATH);
@@ -51,11 +50,10 @@ public class Storage {
     }
 
     /**
-     * Writes the Tasks contained in the TaskList to a new .txt file.
-     * <p>
-     * Throws an IOException is writing to the .txt file fails.
+     * Saves the tasks from the TaskList into the specified .txt file.
+     * Each task is written to a new line in the file. If the file already exists, it is overwritten.
      *
-     * @param list A TaskList containing all tasks.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
      */
     public void saveTasks(TaskList list) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {

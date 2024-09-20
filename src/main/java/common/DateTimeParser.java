@@ -14,11 +14,13 @@ public class DateTimeParser {
     };
 
     /**
-     * Returns a LocalDateTime object based on whether the input dateTimeStr matches one of the given formats. If the
-     * format is valid, a LocalDateTime object is returned. If not, an IllegalArgumentException is thrown.
+     * Parses a date-time string and returns a LocalDateTime object.
+     * The input string is checked against a set of predefined formats. If a valid format is found,
+     * a LocalDateTime object is returned. Otherwise, an IllegalArgumentException is thrown.
      *
-     * @param dateTimeStr The string that contains the user input.
-     * @return
+     * @param dateTimeStr The string that contains the user input representing a date and time.
+     * @return A LocalDateTime object parsed from the input string.
+     * @throws IllegalArgumentException If the input string does not match any recognized date-time format.
      */
     public static LocalDateTime parse(String dateTimeStr) throws IllegalArgumentException {
         for (DateTimeFormatter formatter : FORMATTERS) {
@@ -30,6 +32,13 @@ public class DateTimeParser {
         throw new IllegalArgumentException("Date-time string is not in a recognized format: " + dateTimeStr);
     }
 
+    /**
+     * Attempts to parse the given date-time string using the specified formatter.
+     *
+     * @param dateTimeStr The date-time string to parse.
+     * @param formatter The DateTimeFormatter to use for parsing the string.
+     * @return A LocalDateTime object if the parsing succeeds, or null if it fails.
+     */
     private static LocalDateTime parseWithFormatter(String dateTimeStr, DateTimeFormatter formatter) {
         try {
             return LocalDateTime.parse(dateTimeStr, formatter);
@@ -39,12 +48,12 @@ public class DateTimeParser {
     }
 
     /**
-     * Returns a String which represents the date and time in the format specified by a CUSTOM_FORMATTER.
+     * Formats the given LocalDateTime object into a string using a custom format.
+     * If the LocalDateTime is null, the method returns the provided fallback string.
      *
-     * @param dateTime The optional LocalDateTime in the Task object.
-     * @param str The mandatory String describing a Task's deadline.
-     *
-     * @return A String representing the deadline of a Task.
+     * @param dateTime The LocalDateTime object to format. Can be null.
+     * @param str The fallback string to use if dateTime is null.
+     * @return A formatted string representing the date and time, or the fallback string if dateTime is null.
      */
     public static String format(LocalDateTime dateTime, String str) {
         if (dateTime == null) {

@@ -22,15 +22,13 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Separates the input into a description string, a from string, and a to string. If these strings are valid, an
-     * event object is created. The Event object is then added to the TaskList. Storage saves the event object
-     * into the local .txt file. The Ui outputs a message to the terminal to notify the user this has been done.
-     * Throws a MissingCommandException if either /from or /to commands are missing.
-     * Throws IllegalArgumentException if /from comes after /to.
+     * Executes the EventCommand by parsing the input, creating an Event object,
+     * and adding it to the task list.
+     * It also updates the storage and informs the user through the CLI.
      *
-     * @param list List which stores all Tasks in the chatbot.
-     * @param ui The interface which the user will be interacting with.
-     * @param storage Stores previous and current Task objects.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param ui The Ui object that handles interactions with the user.
+     * @param storage The Storage object that manages saving and loading tasks.
      * @throws FridayException if there are issues with the input or task processing.
      */
     @Override
@@ -51,6 +49,16 @@ public class EventCommand extends Command {
         return false;
     }
 
+    /**
+     * Executes the EventCommand by parsing the input, creating an Event object,
+     * and adding it to the task list.
+     * It also updates the storage and informs the user through the GUI.
+     *
+     * @param list The TaskList object that stores all tasks.
+     * @param storage The Storage object that manages saving and loading tasks.
+     * @return The response message for the GUI after the task is added.
+     * @throws FridayException If there are issues with the input or task processing.
+     */
     @Override
     public String guiResponse(TaskList list, Storage storage) throws FridayException {
         Task event = createEventFromInput();
@@ -63,14 +71,14 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Creates an Event object by parsing the input, ensuring the proper order and presence of the /from and /to
-     * keywords, and validating the description and date fields.
+     * Parses the input to create an Event object by extracting the event description,
+     * start (/from), and end (/to) dates.
+     * Validates that the /from and /to commands are correctly ordered and present.
      *
      * @return An Event object created from the input.
      * @throws MissingCommandException If either /from or /to is missing.
-     * @throws DescriptionException If the description is empty.
-     * @throws FridayException If the from date is empty.
-     * @throws FridayException If the to date is empty.
+     * @throws DescriptionException If the event description is empty.
+     * @throws FridayException If the from or to date is empty, or if /from comes after /to.
      */
     private Task createEventFromInput() throws FridayException {
         validateInput();
@@ -78,9 +86,8 @@ public class EventCommand extends Command {
         int fromIndex = this.input.indexOf("/from");
         int toIndex = this.input.indexOf("/to");
 
-        // Ensure /from comes before /to
         if (fromIndex > toIndex) {
-            throw new FridayException("/from must come before /to");
+            throw new FridayException("Seems like you have used /to before /from. Use /from before /to.");
         }
 
         String eventDescription = extractDescription(fromIndex);
@@ -93,7 +100,7 @@ public class EventCommand extends Command {
     /**
      * Validates that the input contains both /from and /to commands.
      *
-     * @throws MissingCommandException if either /from or /to is missing.
+     * @throws MissingCommandException If either /from or /to is missing from the input.
      */
     private void validateInput() throws MissingCommandException {
         if (!this.input.contains("/from")) {

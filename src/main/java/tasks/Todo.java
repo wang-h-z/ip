@@ -15,10 +15,11 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns a Todo Task given a String that represents a Todo Task.
+     * Creates a Todo task from a string representation of a Todo task.
+     * Parses the task's completion status, priority level, and description from the string.
      *
-     * @param str The String that represents the Todo Task.
-     * @return
+     * @param str The string that represents the Todo task.
+     * @return The created Todo task.
      */
     public static Todo fromString(String str) {
         boolean isDone = str.contains("[X]");
@@ -37,7 +38,7 @@ public class Todo extends Task {
      * Extracts the priority level from the task string.
      *
      * @param str The task string.
-     * @return The priority level.
+     * @return The priority level as a single character (H, M, L).
      */
     private static String extractPriorityLevel(String str) {
         return str.substring(4, 5);
@@ -50,7 +51,7 @@ public class Todo extends Task {
      * @return The task description.
      */
     private static String extractDescription(String str) {
-        return str.substring(9).trim(); // Assuming "[T][H][X] description" format
+        return str.substring(9).trim();
     }
 
 }

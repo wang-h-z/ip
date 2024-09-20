@@ -1,7 +1,7 @@
 package common;
 
 public class BotMessage {
-    private final String spacing = "____________________________________________________________";
+    private final String SPACING = "____________________________________________________________";
     private final String description;
 
     public BotMessage(String description) {
@@ -10,6 +10,6 @@ public class BotMessage {
 
     @Override
     public String toString() {
-        return '\t' + this.spacing + '\n' + this.description + '\n' + '\t' + this.spacing + "\n";
+        return '\t' + SPACING + '\n' + this.description + '\n' + '\t' + SPACING + "\n";
     }
 }

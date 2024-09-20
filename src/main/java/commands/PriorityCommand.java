@@ -41,9 +41,9 @@ public class PriorityCommand extends Command {
     /**
      * Parses the task index from the user input string.
      *
-     * @param list TaskList to check for valid task index.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
      * @return Task index (1-based).
-     * @throws FridayException if input is invalid or task index is out of bounds.
+     * @throws FridayException If the input is invalid or the task index is out of bounds.
      */
     private int parseTaskIndex(TaskList list) throws FridayException {
         int priorityIndex = this.input.indexOf("priority") + "priority".length();
@@ -68,7 +68,7 @@ public class PriorityCommand extends Command {
      * Parses the priority level from the user input string.
      *
      * @return Parsed priority level.
-     * @throws FridayException if priority level is invalid.
+     * @throws FridayException If the priority level is invalid.
      */
     private Priorities parsePriorityLevel() throws FridayException {
         int lvlIndex = this.input.indexOf("/lvl");
@@ -87,16 +87,25 @@ public class PriorityCommand extends Command {
     /**
      * Sets the priority for the specified task.
      *
-     * @param list TaskList to update the task's priority.
-     * @param idx Task index to update.
-     * @param priority Priority level to set.
-     * @param storage Storage to save tasks.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param idx The task index to update.
+     * @param priority The priority level to set.
+     * @param storage The Storage object that manages saving and loading tasks.
      */
     private void setTaskPriority(TaskList list, int idx, Priorities priority, Storage storage) {
         list.get(idx).setPriority(priority);
         storage.saveTasks(list);
     }
 
+    /**
+     * Executes the PriorityCommand by setting the priority of the specified task and displaying the result
+     * in the terminal.
+     *
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param ui The Ui object that handles interactions with the user.
+     * @param storage The Storage object that manages saving and loading tasks.
+     * @throws FridayException If there is an issue with the input or task processing.
+     */
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) throws FridayException {
         if (!this.input.contains("/lvl")) {
@@ -108,11 +117,25 @@ public class PriorityCommand extends Command {
         ui.showOutput("\t Nice! I've added a priority to this task:\n\t  " + list.get(taskIdx));
     }
 
+    /**
+     * Indicates whether the command causes the chatbot to exit.
+     * PriorityCommand does not stop the chatbot, so this always returns false.
+     *
+     * @return false, indicating that the chatbot should not exit.
+     */
     @Override
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Executes the PriorityCommand and returns the response message for the GUI.
+     *
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param storage The Storage object that manages saving and loading tasks.
+     * @return The response message for the GUI confirming the priority change.
+     * @throws FridayException If there is an issue with the input or task processing.
+     */
     @Override
     public String guiResponse(TaskList list, Storage storage) throws FridayException {
         if (!this.input.contains("/lvl")) {
@@ -128,7 +151,7 @@ public class PriorityCommand extends Command {
      * Converts a priority string into a Priorities enum.
      *
      * @param input The priority string (H, M, L).
-     * @return Corresponding priority enum.
+     * @return The corresponding priority enum.
      */
     public static Priorities priorityString(String input) {
         switch (input) {

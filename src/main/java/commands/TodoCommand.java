@@ -20,11 +20,12 @@ public class TodoCommand extends Command {
 
     /**
      * Creates a new Todo task from the user input after validating the description.
+     * Adds the new task to the TaskList and saves it in the storage.
      *
-     * @param list The list of tasks.
-     * @param storage The storage for saving tasks.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param storage The Storage object that manages saving and loading tasks.
      * @return The created Todo task.
-     * @throws DescriptionException If the description is invalid.
+     * @throws DescriptionException If the description is missing or invalid.
      */
     private Task createTodoTask(TaskList list, Storage storage) throws DescriptionException {
         if (this.input.trim().length() == "todo".length() || this.input.substring(5).trim().isEmpty()) {
@@ -37,12 +38,13 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Executes the TodoCommand by creating a new Todo task and displaying the result via the UI.
+     * Executes the TodoCommand by creating a new Todo task, updating the TaskList,
+     * saving it to storage, and displaying the result to the user via the UI.
      *
-     * @param list List which stores all Tasks in the chatbot.
-     * @param ui The interface which the user will be interacting with.
-     * @param storage Stores previous and current Task objects.
-     * @throws DescriptionException If the description is invalid.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param ui The Ui object that handles interactions with the user.
+     * @param storage The Storage object that manages saving and loading tasks.
+     * @throws DescriptionException If the description is missing or invalid.
      */
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) throws DescriptionException {
@@ -51,9 +53,10 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Returns false as a TodoCommand does not stop the chatbot.
+     * Indicates that a TodoCommand does not stop the chatbot.
+     * This method always returns false.
      *
-     * @return false
+     * @return false, indicating that the chatbot should not exit.
      */
     @Override
     public boolean isExit() {
@@ -61,12 +64,13 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Executes the TodoCommand and returns the response for the GUI.
+     * Executes the TodoCommand and returns a response message for the GUI,
+     * showing the newly added task and the updated task count.
      *
-     * @param list List which stores all Tasks in the chatbot.
-     * @param storage Stores previous and current Task objects.
-     * @return A string response for the GUI.
-     * @throws DescriptionException If the description is invalid.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param storage The Storage object that manages saving and loading tasks.
+     * @return A string response for the GUI, confirming the addition of the Todo task.
+     * @throws DescriptionException If the description is missing or invalid.
      */
     @Override
     public String guiResponse(TaskList list, Storage storage) throws DescriptionException {

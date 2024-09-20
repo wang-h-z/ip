@@ -28,20 +28,20 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + DateTimeParser.format(byDate, by) + ")";
     }
 
+    /**
+     * Returns the deadline date of the task as a LocalDateTime object.
+     *
+     * @return The deadline date, or null if it is stored as a string.
+     */
     public LocalDateTime getDate() {
         return this.byDate;
     }
 
     /**
-     * Returns a Deadline object given a String that represents a Deadline task.
+     * Creates a Deadline object from a string representation of a Deadline task.
+     * Parses the task's completion status, priority level, description, and deadline date.
      *
-     * @param str The String that represents the Deadline task.
-     * @return
-     */
-    /**
-     * Returns a Deadline object given a String that represents a Deadline task.
-     *
-     * @param str The String that represents the Deadline task.
+     * @param str The string representing the Deadline task.
      * @return The created Deadline object.
      */
     public static Deadline fromString(String str) {
@@ -60,8 +60,9 @@ public class Deadline extends Task {
 
     /**
      * Extracts the priority level from the task string.
+     *
      * @param str The task string.
-     * @return The priority level.
+     * @return The priority level as a string.
      */
     private static String extractPriorityLevel(String str) {
         return str.substring(4, 5);
@@ -69,6 +70,7 @@ public class Deadline extends Task {
 
     /**
      * Extracts the description from the task string.
+     *
      * @param str The task string.
      * @return The task description.
      */
@@ -79,6 +81,7 @@ public class Deadline extends Task {
 
     /**
      * Extracts the 'by' date string from the task string.
+     *
      * @param str The task string.
      * @return The 'by' date string.
      */

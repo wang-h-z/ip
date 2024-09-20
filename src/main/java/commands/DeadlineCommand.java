@@ -23,11 +23,14 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Executes the command by parsing the input and adding a Deadline task to the list.
+     * This method creates a Deadline task from the given user input. If the Deadline object
+     * is successfully created, the method adds the Deadline to the TaskList, saves it in Storage and
+     * outputs a response to the CLI.
+     * A FridayException is thrown if the Deadline task was not created successfully.
      *
-     * @param list    List which stores all Tasks in the chatbot.
-     * @param ui      The interface which the user will be interacting with.
-     * @param storage Stores previous and current Task objects.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param ui The Ui object that handles interactions with the user.
+     * @param storage The Storage object that manages saving and loading tasks.
      * @throws FridayException If there are missing parameters or invalid input.
      */
     @Override
@@ -39,10 +42,13 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Returns a formatted response for the GUI by parsing the input and adding a Deadline task to the list.
+     * This method creates a Deadline task from the given user input. If the Deadline object
+     * is successfully created, the method adds the Deadline to the TaskList, saves it in Storage and
+     * outputs a response to the GUI.
+     * A FridayException is thrown if the Deadline task was not created successfully.
      *
-     * @param list    List which stores all Tasks in the chatbot.
-     * @param storage Stores previous and current Task objects.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param storage The Storage object that manages saving and loading tasks.
      * @return The response message to be displayed in the GUI.
      * @throws FridayException If there are missing parameters or invalid input.
      */
@@ -63,7 +69,7 @@ public class DeadlineCommand extends Command {
      * @return A new Deadline task.
      * @throws FridayException If there are missing parameters or invalid input.
      */
-    private Task createDeadlineTask() throws FridayException {
+    private Deadline createDeadlineTask() throws FridayException {
         if (!input.contains("/by")) {
             throw new MissingCommandException("/by");
         }

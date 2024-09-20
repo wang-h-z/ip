@@ -16,11 +16,12 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes the find command by searching for tasks that match the provided keyword.
+     * Executes the find command by searching the TaskList for tasks that match the provided keyword.
+     * Displays the matching tasks to the user via the CLI.
      *
-     * @param list    List which stores all Tasks in the chatbot.
-     * @param ui      The interface that the user will be interacting with.
-     * @param storage Stores previous and current Task objects.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param ui The Ui object that handles interactions with the user.
+     * @param storage The Storage object that manages saving and loading tasks.
      * @throws FridayException If no keyword is provided for the search.
      */
     @Override
@@ -30,7 +31,8 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Returns false as the chatbot continues running after a FindCommand.
+     * Indicates whether the command causes the chatbot to exit.
+     * FindCommand does not stop the chatbot, so this always returns false.
      *
      * @return false
      */
@@ -39,6 +41,14 @@ public class FindCommand extends Command {
         return false;
     }
 
+    /**
+     * Executes the FindCommand and returns the response message for the GUI.
+     *
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param storage The Storage object that manages saving and loading tasks.
+     * @return The response message for the GUI, showing matching tasks.
+     * @throws FridayException If no keyword is provided in the input.
+     */
     @Override
     public String guiResponse(TaskList list, Storage storage) throws FridayException {
         TaskList filtered = findTasksByKeyword(list);
@@ -46,7 +56,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Extracts the keyword from the input and filters the TaskList based on the keyword.
+     * Extracts the keyword from the input and searches the TaskList for tasks containing that keyword.
      *
      * @param list The TaskList to search through.
      * @return A TaskList containing the tasks that match the keyword.

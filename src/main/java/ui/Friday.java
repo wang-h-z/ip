@@ -32,11 +32,9 @@ public class Friday {
     }
 
     /**
-     * A method to run the chatbot. The Command is always executed and determines whether the chatbot should be
-     * stopped using isExit().
-     *
-     * A FridayException is caught when any point in the bot logic throws a FridayException or a subclass of the
-     * Exception. 
+     * Starts the chatbot in a terminal environment.
+     * Continuously reads user input, processes commands, and determines whether to exit based on the commands issued.
+     * Catches and displays a FridayException when an error occurs during the bot's execution.
      */
     public void start() {
         boolean isExit = false;
@@ -54,10 +52,20 @@ public class Friday {
         } // end of loop
     }
 
+    /**
+     * Initializes the chatbot in a GUI environment by loading tasks from storage.
+     */
     public void guiStart() {
         this.storage.loadTasks(list);
     }
 
+    /**
+     * Processes a user command from the GUI and returns the bot's response.
+     * Parses the input, executes the command, and returns the appropriate response message.
+     *
+     * @param input The user input from the GUI.
+     * @return The bot's response message based on the input command.
+     */
     public String getResponse(String input) {
         try {
             Command c = this.parser.parse(input, list, storage);
@@ -67,6 +75,12 @@ public class Friday {
         }
     }
 
+    /**
+     * The main method to start the chatbot.
+     * Initializes the bot with a specified storage file and starts the terminal interaction.
+     *
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String args[]) {
         Friday bot = new Friday("data/Friday.txt");
         bot.start();

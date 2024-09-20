@@ -16,11 +16,12 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Marks the Task at the given index in the TaskList as done and returns a message.
+     * Marks the task at the given index in the TaskList as done and saves the updated list in storage.
      *
-     * @param list List which stores all Tasks in the chatbot.
-     * @param storage Stores previous and current Task objects.
-     * @return The message confirming the task is marked as done.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param storage The Storage object that manages saving and loading tasks.
+     * @return A message confirming that the task is marked as done.
+     * @throws FridayException If the input is invalid, or the task index is out of bounds.
      */
     private String markTask(TaskList list, Storage storage) throws FridayException {
         String i = input.substring("mark".length()).trim();
@@ -40,11 +41,11 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Executes the MarkCommand by marking the task and showing output in the terminal.
+     * Executes the MarkCommand by marking the task and showing output in the CLI.
      *
-     * @param list List which stores all Tasks in the chatbot.
-     * @param ui The interface which the user will be interacting with.
-     * @param storage Stores previous and current Task objects.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param ui The Ui object that handles interactions with the user.
+     * @param storage The Storage object that manages saving and loading tasks.
      */
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) throws FridayException {
@@ -65,8 +66,8 @@ public class MarkCommand extends Command {
     /**
      * Executes the MarkCommand and returns the response for the GUI.
      *
-     * @param list List which stores all Tasks in the chatbot.
-     * @param storage Stores previous and current Task objects.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param storage The Storage object that manages saving and loading tasks.
      * @return The GUI response message.
      */
     @Override

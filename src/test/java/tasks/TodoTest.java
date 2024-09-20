@@ -56,7 +56,6 @@ public class TodoTest {
 
     @Test
     public void emptyDescriptionThrowsAssertionError() {
-        // Test that an empty description throws an assertion error
         assertThrows(AssertionError.class, () -> new Todo(""),
                 "Empty description should throw an AssertionError");
     }

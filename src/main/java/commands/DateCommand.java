@@ -21,13 +21,12 @@ public class DateCommand extends Command {
     }
 
     /**
-     * Extracts the date from the input, checks if the format is valid, and filters tasks based on the date.
-     * <p>
-     * Throws FridayException if the date format is invalid or missing.
+     * Generates a response for the CLI interface by finding tasks due before a given date.
+     * Throws an exception to handle missing or invalid inputs.
      *
-     * @param list List which stores all Tasks in the chatbot.
-     * @param ui The interface which the user will be interacting with.
-     * @param storage Stores previous and current Task objects.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param ui The Ui object that handles interactions with the user.
+     * @param storage The Storage object that manages saving and loading tasks.
      * @throws FridayException If an error occurs in parsing or processing the tasks.
      */
     @Override
@@ -35,7 +34,7 @@ public class DateCommand extends Command {
         LocalDateTime userTime = parseDate();
         TaskList dateList = getTasksBeforeDate(list, userTime);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
-        ui.dateOutput(userTime.format(formatter), list);
+        ui.dateOutput(userTime.format(formatter), dateList);
     }
 
     /**
@@ -50,10 +49,10 @@ public class DateCommand extends Command {
 
     /**
      * Generates a response for the GUI interface by finding tasks due before a given date.
-     * Throws FridayException if the date format is invalid or missing.
+     * Throws an exception to handle missing or invalid inputs.
      *
-     * @param list List which stores all Tasks in the chatbot.
-     * @param storage Stores previous and current Task objects.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
+     * @param storage The Storage object that manages saving and loading tasks.
      * @return The formatted string response to be displayed in the GUI.
      * @throws FridayException If an error occurs in parsing or processing the tasks.
      */
@@ -89,7 +88,7 @@ public class DateCommand extends Command {
     /**
      * Filters tasks from the TaskList that have deadlines or events before the given date.
      *
-     * @param list TaskList containing all tasks.
+     * @param list The TaskList object which stores all Tasks in the chatbot.
      * @param userTime LocalDateTime object representing the date to filter by.
      * @return A TaskList containing tasks due before the specified date.
      */
