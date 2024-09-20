@@ -61,7 +61,7 @@ public class EventCommand extends Command {
      */
     @Override
     public String guiResponse(TaskList list, Storage storage) throws FridayException {
-        Task event = createEventFromInput();
+        Event event = createEventFromInput();
         list.add(event);
         storage.saveTasks(list);
         return String.format("""
@@ -80,7 +80,7 @@ public class EventCommand extends Command {
      * @throws DescriptionException If the event description is empty.
      * @throws FridayException If the from or to date is empty, or if /from comes after /to.
      */
-    private Task createEventFromInput() throws FridayException {
+    private Event createEventFromInput() throws FridayException {
         validateInput();
 
         int fromIndex = this.input.indexOf("/from");
@@ -94,7 +94,11 @@ public class EventCommand extends Command {
         String from = extractFromDate(fromIndex, toIndex);
         String to = extractToDate(toIndex);
 
-        return new Event(eventDescription, from, to);
+        try {
+            return new Event(eventDescription, from, to);
+        } catch (IllegalArgumentException e) {
+            throw new FridayException("Looks like your start date is later than your end date. Please try again");
+        }
     }
 
     /**
